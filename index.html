@@ -12,11 +12,10 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
         
         .paw-bg { position: fixed; font-size: 40px; opacity: 0.05; pointer-events: none; z-index: 0; }
-        .paw-1 { top: 8%; left: 4%; transform: rotate(-20deg); }
-        .paw-2 { top: 22%; right: 6%; transform: rotate(15deg); }
-        .paw-3 { bottom: 28%; left: 10%; transform: rotate(-10deg); }
-        .paw-4 { bottom: 10%; right: 12%; transform: rotate(25deg); }
-        .paw-5 { top: 55%; left: 2%; transform: rotate(-5deg); }
+        .paw-bg-1 { top: 8%; left: 4%; transform: rotate(-20deg); }
+        .paw-bg-2 { top: 22%; right: 6%; transform: rotate(15deg); }
+        .paw-bg-3 { bottom: 28%; left: 10%; transform: rotate(-10deg); }
+        .paw-bg-4 { bottom: 10%; right: 12%; transform: rotate(25deg); }
         
         /* Header */
         .header { background: rgba(255, 255, 255, 0.97); padding: 0.9rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
@@ -30,16 +29,21 @@
         
         /* Hero */
         .hero { padding: 7rem 18px 2.5rem; text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-        .dog-icon { font-size: 72px; margin-bottom: 1.5rem; display: inline-block; animation: headShake 2s ease-in-out infinite; transform-origin: center bottom; }
-        @keyframes headShake {
-            0%, 100% { transform: rotate(0deg); }
-            15% { transform: rotate(-12deg); }
-            30% { transform: rotate(10deg); }
-            45% { transform: rotate(-8deg); }
-            60% { transform: rotate(6deg); }
-            75% { transform: rotate(-3deg); }
-            90% { transform: rotate(1deg); }
+        
+        /* Paw Walking Animation */
+        .paw-walk { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 1.5rem; }
+        .paw { font-size: 80px; display: inline-block; transition: opacity 0.25s ease, transform 0.25s ease; }
+        .paw.left { animation: pawLeft 1s ease-in-out infinite; }
+        .paw.right { animation: pawRight 1s ease-in-out infinite; animation-delay: 0.5s; }
+        @keyframes pawLeft {
+            0%, 100% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+            50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
         }
+        @keyframes pawRight {
+            0%, 100% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+            50% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+        }
+        
         .hero h1 { font-size: 2.4rem; margin-bottom: 0.8rem; line-height: 1.2; }
         .hero h1 span { background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 480px; margin: 0 auto 1.5rem; }
@@ -91,17 +95,16 @@
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .hero h1 { font-size: 2rem; }
-            .dog-icon { font-size: 60px; }
+            .paw { font-size: 60px; }
             .big-btn { padding: 16px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="paw-bg paw-1">🐾</div>
-    <div class="paw-bg paw-2">🐾</div>
-    <div class="paw-bg paw-3">🐾</div>
-    <div class="paw-bg paw-4">🐾</div>
-    <div class="paw-bg paw-5">🐾</div>
+    <div class="paw-bg paw-bg-1">🐾</div>
+    <div class="paw-bg paw-bg-2">🐾</div>
+    <div class="paw-bg paw-bg-3">🐾</div>
+    <div class="paw-bg paw-bg-4">🐾</div>
 
     <header class="header">
         <div class="header-inner">
@@ -117,7 +120,11 @@
     </header>
 
     <section class="hero">
-        <div class="dog-icon">🐕</div>
+        <!-- Walking Paws Animation -->
+        <div class="paw-walk">
+            <span class="paw left">🐾</span>
+            <span class="paw right">🐾</span>
+        </div>
         <h1>Help Your <span>Senior Dog</span> Live Better</h1>
         <p>Free AI health check for dogs 7+ years. Early detection of arthritis, kidney & heart conditions.</p>
     </section>
