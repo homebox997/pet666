@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Assessment | Senior Dog Health</title>
+    <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pet666.vercel.app/assessment.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
+        
+        .paw-bg { position: fixed; font-size: 40px; opacity: 0.04; pointer-events: none; z-index: 0; }
+        .paw-1 { top: 15%; left: 8%; transform: rotate(-15deg); }
+        .paw-2 { top: 40%; right: 10%; transform: rotate(20deg); }
+        .paw-3 { bottom: 25%; left: 5%; transform: rotate(-8deg); }
+        .paw-4 { bottom: 10%; right: 12%; transform: rotate(18deg); }
+        
+        .header { background: rgba(255, 255, 255, 0.95); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.5rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 10px 16px; border-radius: 25px; transition: all 0.3s; font-size: 0.95rem; }
+        .nav a:hover { background: #f5f5f5; }
+        .nav a.highlight { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
+        
+        .progress-section { padding: 5.5rem 18px 1rem; max-width: 600px; margin: 0 auto; }
+        .progress-bar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
+        .progress-step { flex: 1; height: 8px; background: #e0e0e0; border-radius: 4px; transition: all 0.3s; }
+        .progress-step.active { background: linear-gradient(135deg, #ff6b6b, #ff8e53); }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: #999; }
+        .progress-labels span.active { color: #ff6b6b; font-weight: 600; }
+        
+        .form-section { padding: 1rem 18px 3rem; max-width: 600px; margin: 0 auto; }
+        .form-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); display: none; }
+        .form-card.active { display: block; }
+        .form-card h2 { font-size: 1.6rem; margin-bottom: 0.5rem; color: #2c3e50; }
+        .form-card p { color: #7a8a9a; margin-bottom: 1.5rem; }
+        
+        .form-group { margin-bottom: 1.3rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #2c3e50; }
+        .form-group input[type="text"], .form-group input[type="number"], .form-group input[type="email"] { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
+        .form-group input:focus { outline: none; border-color: #ff6b6b; }
+        
+        .gender-options { display: flex; gap: 1rem; }
+        .gender-option { flex: 1; }
+        .gender-option input { display: none; }
+        .gender-option label { display: block; padding: 14px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+        .gender-option input:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
+        
+        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; }
+        .checkbox-item:hover { background: #fff5f0; }
+        .checkbox-item input { margin-top: 4px; width: 18px; height: 18px; cursor: pointer; }
+        .checkbox-item label { flex: 1; font-size: 0.95rem; line-height: 1.4; cursor: pointer; }
+        
+        .btn-group { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+        .btn { padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; }
+        .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); }
+        .btn-secondary { background: white; color: #ff6b6b; border: 2px solid #ff6b6b; }
+        .btn-secondary:hover { background: #fff5f0; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .result-card { background: linear-gradient(135deg, #fff5f0, #ffe8d6); padding: 2.5rem; border-radius: 20px; text-align: center; display: none; }
+        .result-card.active { display: block; }
+        .result-card h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #2c3e50; }
+        .result-card p { color: #5a6c7d; line-height: 1.6; }
+        
+        .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 3rem; }
+        .footer a { color: #ff8e53; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .header-inner { position: relative; }
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 1rem; gap: 0.5rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 12px; width: 100%; }
+            .form-card { padding: 1.5rem; }
+            .checkbox-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="paw-bg paw-1">🐾</div>
+    <div class="paw-bg paw-2">🐾</div>
+    <div class="paw-bg paw-3">🐾</div>
+    <div class="paw-bg paw-4">🐾</div>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">🐾 Senior Dog Health</a>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+            <nav class="nav" id="navMenu">
+                <a href="assessment.html" class="highlight">AI Health Check</a>
+                <a href="community.html">Community</a>
+                <a href="index.html#diseases">Diseases Guide</a>
+                <a href="index.html#blog">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="progress-section">
+        <div class="progress-bar">
+            <div class="progress-step active" id="step1Bar"></div>
+            <div class="progress-step" id="step2Bar"></div>
+        </div>
+        <div class="progress-labels">
+            <span id="label1" class="active">Step 1: Basic Info</span>
+            <span id="label2">Step 2: Symptoms</span>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="form-card active" id="step1">
+            <h2>Tell us about your dog 🐕</h2>
+            <p>Basic information helps us provide better recommendations.</p>
+            
+            <div class="form-group">
+                <label>Dog's Name</label>
+                <input type="text" id="dogName" placeholder="e.g. Buddy">
+            </div>
+            
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-options">
+                    <div class="gender-option">
+                        <input type="radio" name="gender" id="male" value="male">
+                        <label for="male">♂ Male</label>
+                    </div>
+                    <div class="gender-option">
+                        <input type="radio" name="gender" id="female" value="female">
+                        <label for="female">♀ Female</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Age (years)</label>
+                <input type="number" id="dogAge" placeholder="e.g. 12" min="1" max="25">
+            </div>
+            
+            <div class="btn-group" style="justify-content: flex-end;">
+                <button class="btn btn-primary" onclick="goToStep(2)">Next →</button>
+            </div>
+        </div>
+
+        <div class="form-card" id="step2">
+            <h2>Select symptoms 🩺</h2>
+            <p>Check all symptoms you've noticed in your senior dog.</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s1">
+                    <label for="s1">Stiff or slow when walking</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s2">
+                    <label for="s2">Difficulty getting up after resting</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s3">
+                    <label for="s3">Reluctant to jump or climb stairs</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s4">
+                    <label for="s4">Limping or favoring one leg</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s5">
+                    <label for="s5">Increased thirst or urination</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s6">
+                    <label for="s6">Loss of appetite or weight loss</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s7">
+                    <label for="s7">Vomiting or diarrhea</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s8">
+                    <label for="s8">Bad breath or mouth odor</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s9">
+                    <label for="s9">Coughing, especially at night</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s10">
+                    <label for="s10">Difficulty breathing or rapid breathing</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s11">
+                    <label for="s11">Fatigue or exercise intolerance</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s12">
+                    <label for="s12">Fainting or collapsing</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s13">
+                    <label for="s13">Cloudy eyes or vision problems</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s14">
+                    <label for="s14">Confusion or disorientation</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s15">
+                    <label for="s15">Excessive panting</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s16">
+                    <label for="s16">Lumps or swelling</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s17">
+                    <label for="s17">Changes in behavior or personality</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s18">
+                    <label for="s18">Weight gain or pot belly</label>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label>Your Email (to receive the report)</label>
+                <input type="email" id="email" placeholder="you@example.com">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+                <button class="btn btn-primary" onclick="submitForm()">Submit</button>
+            </div>
+        </div>
+
+        <div class="result-card" id="result">
+            <h2>✅ Assessment Submitted!</h2>
+            <p>Thank you for completing the health assessment for your senior dog.</p>
+            <p style="margin-top: 1rem;">We'll analyze the symptoms and send a personalized report to your email within 24 hours.</p>
+            <a href="index.html" class="btn btn-primary" style="display: inline-block; margin-top: 2rem;">← Back to Home</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 Senior Dog Health Hub</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="index.html">Home</a> · 
+            <a href="assessment.html">AI Check</a> · 
+            <a href="community.html">Community</a>
+        </p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('open');
+        }
+        
+        function goToStep(step) {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('result').classList.remove('active');
+            document.getElementById('step' + step).classList.add('active');
+            
+            document.getElementById('step1Bar').classList.remove('active');
+            document.getElementById('step2Bar').classList.remove('active');
+            document.getElementById('step' + step + 'Bar').classList.add('active');
+            
+            document.getElementById('label1').classList.remove('active');
+            document.getElementById('label2').classList.remove('active');
+            document.getElementById('label' + step).classList.add('active');
+        }
+        
+        function submitForm() {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('result').classList.add('active');
+            document.getElementById('step1Bar').classList.add('active');
+            document.getElementById('step2Bar').classList.add('active');
+            document.getElementById('label1').classList.add('active');
+            document.getElementById('label2').classList.add('active');
+        }
+    </script>
+</body>
+</html>
