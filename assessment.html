@@ -13,22 +13,7 @@
         .header { background: rgba(255, 255, 255, 0.97); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .logo-img { height: 36px; display: block; }
-        
-        /* 4 Paws Walking */
-        .paw-trail { display: flex; justify-content: center; align-items: flex-end; gap: 8px; margin-bottom: 1rem; overflow: hidden; height: 70px; }
-        .paw-walk { font-size: 48px; display: inline-block; animation: pawWalk 2.4s ease-in-out infinite; }
-        .paw-walk:nth-child(1) { animation-delay: 0s; }
-        .paw-walk:nth-child(2) { animation-delay: 0.4s; }
-        .paw-walk:nth-child(3) { animation-delay: 0.8s; }
-        .paw-walk:nth-child(4) { animation-delay: 1.2s; }
-        @keyframes pawWalk {
-            0%   { opacity: 0; transform: translateY(25px) scale(0.7); }
-            15%  { opacity: 1; transform: translateY(0) scale(1); }
-            70%  { opacity: 1; transform: translateY(-15px) scale(1.1); }
-            85%  { opacity: 0.3; transform: translateY(-22px) scale(0.9); }
-            100% { opacity: 0; transform: translateY(-30px) scale(0.7); }
-        }
+        .logo-img { height: 22px; display: block; }
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
         .nav { display: flex; gap: 0.3rem; }
         .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
@@ -136,12 +121,6 @@
         <!-- Page 1: Breed + Gender + Nickname + Next -->
         <div class="form-page active" id="page1">
             <div style="text-align:center;">
-                <div class="paw-trail">
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                </div>
                 <h1 class="section-title">AI Health Check</h1>
                 <p class="section-sub">Step 1 of 2 — About your dog</p>
             </div>
@@ -191,12 +170,6 @@
         <!-- Page 2: Symptoms + Email + Submit -->
         <div class="form-page" id="page2">
             <div style="text-align:center;">
-                <div class="paw-trail">
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                    <span class="paw-walk">🐾</span>
-                </div>
                 <h1 class="section-title">Symptoms Check</h1>
                 <p class="section-sub">Step 2 of 2 — Select all symptoms noticed</p>
             </div>
