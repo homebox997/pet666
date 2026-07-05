@@ -238,6 +238,10 @@
     }
     </script>
 
+    <!-- Supabase SDK + Init（数据库接入：只需在 supabase-init.js 填入 URL 和 Key） -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 数据库接口：assessment_db_port = 3003 -->
+    <script src="js/supabase-init.js"></script>
     <script defer src="js/nav.js"></script>
 
     <!-- Assessment logic: must run inline (form interaction) -->
@@ -310,7 +314,8 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
         
-        function submitForm() {
+        async function submitForm() {
+            // === Supabase 提交（数据库接口：assessment_db_port = 3003）===
             var breed = document.getElementById('breed').value;
             var gender = document.getElementById('gender').value;
             var nickname = document.getElementById('nickname').value || 'Your dog';
@@ -368,6 +373,25 @@
                 : '• Schedule a vet appointment\n• Keep a daily symptom diary\n• Monitor water intake & urine output\n• Note changes in appetite & energy';
             document.getElementById('reportRec').textContent = rec;
             
+            // 提交到 Supabase（静默处理，不阻塞前端展示）
+            // 数据库接口：assessment_db_port = 3003
+            if (typeof window.sb !== 'undefined') {
+                var supabaseData = {
+                    breed: breed,
+                    gender: gender,
+                    symptoms: selected,
+                    detected_areas: areas,
+                    symptom_count: selected.length,
+                    nickname: nickname,
+                    email: email || null
+                };
+                window.sb.from('assessments').insert([supabaseData]).then(function() {
+                    if (email) {
+                        window.sb.from('leads').upsert([{ email: email, source: 'assessment' }], { onConflict: 'email' });
+                    }
+                });
+            }
+
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.remove('active');
             document.getElementById('report').classList.add('active');
