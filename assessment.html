@@ -6,7 +6,7 @@
     <title>AI Health Assessment | Senior Dog Health</title>
     <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://pet666.vercel.app/assessment.html">
+    <link rel="canonical" href="https://agedpawwell.com/assessment.html">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
@@ -30,7 +30,7 @@
         .progress-bar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
         .progress-step { flex: 1; height: 8px; background: #e0e0e0; border-radius: 4px; transition: all 0.3s; }
         .progress-step.active { background: linear-gradient(135deg, #ff6b6b, #ff8e53); }
-        .progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: #999; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #999; }
         .progress-labels span.active { color: #ff6b6b; font-weight: 600; }
         
         .form-section { padding: 1rem 18px 3rem; max-width: 600px; margin: 0 auto; }
@@ -44,18 +44,27 @@
         .form-group input[type="text"], .form-group input[type="number"], .form-group input[type="email"] { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
         .form-group input:focus { outline: none; border-color: #ff6b6b; }
         
+        /* Breed Grid */
+        .breed-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+        .breed-option { display: none; }
+        .breed-option + label { display: block; padding: 14px 12px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 0.9rem; background: #f8f9fa; }
+        .breed-option:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
+        
+        /* Gender Selection */
         .gender-options { display: flex; gap: 1rem; }
         .gender-option { flex: 1; }
         .gender-option input { display: none; }
-        .gender-option label { display: block; padding: 14px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+        .gender-option label { display: block; padding: 18px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1.1rem; background: #f8f9fa; }
         .gender-option input:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
         
+        /* Checkbox Grid */
         .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
         .checkbox-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; }
         .checkbox-item:hover { background: #fff5f0; }
         .checkbox-item input { margin-top: 4px; width: 18px; height: 18px; cursor: pointer; }
         .checkbox-item label { flex: 1; font-size: 0.95rem; line-height: 1.4; cursor: pointer; }
         
+        /* Buttons */
         .btn-group { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
         .btn { padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; }
         .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
@@ -64,6 +73,7 @@
         .btn-secondary:hover { background: #fff5f0; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
+        /* Result */
         .result-card { background: linear-gradient(135deg, #fff5f0, #ffe8d6); padding: 2.5rem; border-radius: 20px; text-align: center; display: none; }
         .result-card.active { display: block; }
         .result-card h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #2c3e50; }
@@ -79,7 +89,10 @@
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 12px; width: 100%; }
             .form-card { padding: 1.5rem; }
-            .checkbox-grid { grid-template-columns: 1fr; }
+            .breed-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem; }
+            .breed-option + label { padding: 12px 8px; font-size: 0.85rem; }
+            .gender-option label { padding: 16px; font-size: 1rem; }
+            .progress-labels { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -106,40 +119,88 @@
         <div class="progress-bar">
             <div class="progress-step active" id="step1Bar"></div>
             <div class="progress-step" id="step2Bar"></div>
+            <div class="progress-step" id="step3Bar"></div>
+            <div class="progress-step" id="step4Bar"></div>
         </div>
         <div class="progress-labels">
-            <span id="label1" class="active">Step 1: Basic Info</span>
-            <span id="label2">Step 2: Symptoms</span>
+            <span id="label1" class="active">Breed</span>
+            <span id="label2">Gender</span>
+            <span id="label3">Name</span>
+            <span id="label4">Symptoms</span>
         </div>
     </section>
 
     <section class="form-section">
+        <!-- Step 1: Breed -->
         <div class="form-card active" id="step1">
-            <h2>Tell us about your dog 🐕</h2>
-            <p>Basic information helps us provide better recommendations.</p>
+            <h2>What breed is your dog?</h2>
+            <p>Select your dog's breed from the list below.</p>
             
-            <div class="form-group">
-                <label>Dog's Name</label>
-                <input type="text" id="dogName" placeholder="e.g. Buddy">
-            </div>
-            
-            <div class="form-group">
-                <label>Gender</label>
-                <div class="gender-options">
-                    <div class="gender-option">
-                        <input type="radio" name="gender" id="male" value="male">
-                        <label for="male">♂ Male</label>
-                    </div>
-                    <div class="gender-option">
-                        <input type="radio" name="gender" id="female" value="female">
-                        <label for="female">♀ Female</label>
-                    </div>
+            <div class="breed-grid">
+                <div>
+                    <input type="radio" name="breed" id="breed1" value="Cavoodle" class="breed-option">
+                    <label for="breed1">Cavoodle</label>
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label>Age (years)</label>
-                <input type="number" id="dogAge" placeholder="e.g. 12" min="1" max="25">
+                <div>
+                    <input type="radio" name="breed" id="breed2" value="Labrador" class="breed-option">
+                    <label for="breed2">Labrador</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed3" value="Golden Retriever" class="breed-option">
+                    <label for="breed3">Golden Retriever</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed4" value="French Bulldog" class="breed-option">
+                    <label for="breed4">French Bulldog</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed5" value="German Shepherd" class="breed-option">
+                    <label for="breed5">German Shepherd</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed6" value="Border Collie" class="breed-option">
+                    <label for="breed6">Border Collie</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed7" value="Groodle" class="breed-option">
+                    <label for="breed7">Groodle</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed8" value="Mini Dachshund" class="breed-option">
+                    <label for="breed8">Mini Dachshund</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed9" value="Poodle" class="breed-option">
+                    <label for="breed9">Poodle</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed10" value="Cavalier King Charles" class="breed-option">
+                    <label for="breed10">Cavalier King Charles</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed11" value="Australian Kelpie" class="breed-option">
+                    <label for="breed11">Australian Kelpie</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed12" value="Staffy" class="breed-option">
+                    <label for="breed12">Staffy</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed13" value="Labradoodle" class="breed-option">
+                    <label for="breed13">Labradoodle</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed14" value="Spoodle" class="breed-option">
+                    <label for="breed14">Spoodle</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed15" value="Chihuahua" class="breed-option">
+                    <label for="breed15">Chihuahua</label>
+                </div>
+                <div>
+                    <input type="radio" name="breed" id="breed16" value="Maltese" class="breed-option">
+                    <label for="breed16">Maltese</label>
+                </div>
             </div>
             
             <div class="btn-group" style="justify-content: flex-end;">
@@ -147,9 +208,48 @@
             </div>
         </div>
 
+        <!-- Step 2: Gender -->
         <div class="form-card" id="step2">
-            <h2>Select symptoms 🩺</h2>
-            <p>Check all symptoms you've noticed in your senior dog.</p>
+            <h2>What is your dog's gender?</h2>
+            <p>Select the appropriate option.</p>
+            
+            <div class="gender-options">
+                <div class="gender-option">
+                    <input type="radio" name="gender" id="male" value="Male">
+                    <label for="male">♂ Male</label>
+                </div>
+                <div class="gender-option">
+                    <input type="radio" name="gender" id="female" value="Female">
+                    <label for="female">♀ Female</label>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+                <button class="btn btn-primary" onclick="goToStep(3)">Next →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Nickname -->
+        <div class="form-card" id="step3">
+            <h2>What's your dog's nickname?</h2>
+            <p>Enter a name or nickname for your dog.</p>
+            
+            <div class="form-group">
+                <label>Nickname</label>
+                <input type="text" id="nickname" placeholder="e.g. Buddy, Max, Bella...">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
+                <button class="btn btn-primary" onclick="goToStep(4)">Next →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Symptoms -->
+        <div class="form-card" id="step4">
+            <h2>Any symptoms noticed?</h2>
+            <p>Check all symptoms you've observed in your senior dog.</p>
             
             <div class="checkbox-grid">
                 <div class="checkbox-item">
@@ -232,14 +332,15 @@
             </div>
             
             <div class="btn-group">
-                <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+                <button class="btn btn-secondary" onclick="goToStep(3)">← Back</button>
                 <button class="btn btn-primary" onclick="submitForm()">Submit</button>
             </div>
         </div>
 
+        <!-- Result -->
         <div class="result-card" id="result">
             <h2>✅ Assessment Submitted!</h2>
-            <p>Thank you for completing the health assessment for your senior dog.</p>
+            <p>Thank you for completing the health assessment.</p>
             <p style="margin-top: 1rem;">We'll analyze the symptoms and send a personalized report to your email within 24 hours.</p>
             <a href="index.html" class="btn btn-primary" style="display: inline-block; margin-top: 2rem;">← Back to Home</a>
         </div>
@@ -262,26 +363,30 @@
         function goToStep(step) {
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('step4').classList.remove('active');
             document.getElementById('result').classList.remove('active');
             document.getElementById('step' + step).classList.add('active');
             
-            document.getElementById('step1Bar').classList.remove('active');
-            document.getElementById('step2Bar').classList.remove('active');
+            for (var i = 1; i <= 4; i++) {
+                document.getElementById('step' + i + 'Bar').classList.remove('active');
+                document.getElementById('label' + i).classList.remove('active');
+            }
             document.getElementById('step' + step + 'Bar').classList.add('active');
-            
-            document.getElementById('label1').classList.remove('active');
-            document.getElementById('label2').classList.remove('active');
             document.getElementById('label' + step).classList.add('active');
         }
         
         function submitForm() {
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('step4').classList.remove('active');
             document.getElementById('result').classList.add('active');
-            document.getElementById('step1Bar').classList.add('active');
-            document.getElementById('step2Bar').classList.add('active');
-            document.getElementById('label1').classList.add('active');
-            document.getElementById('label2').classList.add('active');
+            
+            for (var i = 1; i <= 4; i++) {
+                document.getElementById('step' + i + 'Bar').classList.add('active');
+                document.getElementById('label' + i).classList.add('active');
+            }
         }
     </script>
 </body>
