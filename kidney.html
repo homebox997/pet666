@@ -3,150 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kidney Disease in Senior Dogs | Kidney & Urinary | PawWell</title>
-    <meta name="description" content="Complete guide to kidney disease in senior dogs. Learn symptoms, diet tips, treatments and how to support your aging dog's kidney health.">
+    <title>Kidney Disease in Senior Dogs - Complete Guide & Case Study | PawWell</title>
+    <meta name="description" content="Complete guide to kidney disease in senior dogs. Learn symptoms, diet tips, treatments and how to support your aging dog's kidney health naturally.">
     <meta name="robots" content="index, follow">
+    <!-- 数据库接口：case_db_port = 3001 -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #e8f4f8 0%, #d0eef8 100%); min-height: 100vh; }
-        
-        .header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        /* ====== HEADER ====== */
+        .site-header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
         .logo-wrap { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-        .logo-text { font-family: 'Fredoka', 'Segoe UI', sans-serif; font-size: 1.55rem; font-weight: 700; color: #2c3e50; letter-spacing: -0.5px; line-height: 1; }
-        .logo-text span { color: #ff6b6b; }
-        .logo-paws { display: flex; gap: 2px; font-size: 1.1rem; opacity: 0.7; }
         .logo-img { height: 40px; display: block; }
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
         .nav { display: flex; gap: 0.3rem; }
         .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
         .nav a:hover { background: #f0f0f0; }
-        
-        .main { padding: 6rem 18px 3rem; max-width: 760px; margin: 0 auto; }
-        
+        /* ====== MAIN ====== */
+        main { padding: 6rem 18px 3rem; max-width: 760px; margin: 0 auto; }
         .disease-hero { text-align: center; padding-bottom: 2rem; border-bottom: 2px solid #c5e8f5; margin-bottom: 2rem; }
-        .disease-icon { font-size: 5rem; margin-bottom: 1rem; }
         .disease-badge { display: inline-block; background: #e8f4f8; color: #4a9eb8; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.8rem; border: 1px solid #b8dce8; }
         .disease-hero h1 { font-size: 2.2rem; margin-bottom: 0.8rem; color: #2c3e50; }
         .disease-hero p { font-size: 1.05rem; color: #4a6c7d; line-height: 1.7; max-width: 560px; margin: 0 auto; }
-        
-        .section { margin-bottom: 2.5rem; }
-        .section h2 { font-size: 1.4rem; margin-bottom: 1rem; color: #2c3e50; display: flex; align-items: center; gap: 0.5rem; }
-        .section p { color: #4a6c7d; line-height: 1.8; margin-bottom: 0.8rem; font-size: 0.97rem; }
-        
+        section { margin-bottom: 2.5rem; }
+        section h2 { font-size: 1.4rem; margin-bottom: 1rem; color: #2c3e50; }
+        section p { color: #4a6c7d; line-height: 1.8; margin-bottom: 0.8rem; font-size: 0.97rem; }
         .symptom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
         .symptom-item { background: white; padding: 14px; border-radius: 14px; display: flex; align-items: flex-start; gap: 0.6rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .symptom-item .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
         .symptom-item span { font-size: 0.9rem; color: #3d4f63; line-height: 1.4; }
-        
         .tip-card { background: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
         .tip-card h3 { font-size: 1.05rem; color: #4a9eb8; margin-bottom: 0.5rem; }
         .tip-card p { font-size: 0.9rem; color: #4a6c7d; line-height: 1.6; margin: 0; }
-        
         .cta-section { background: linear-gradient(135deg, #4a9eb8, #5ab8d0); border-radius: 20px; padding: 2.5rem; text-align: center; margin: 2.5rem 0; }
         .cta-section h2 { color: white; font-size: 1.6rem; margin-bottom: 0.5rem; }
         .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; font-size: 0.95rem; }
         .cta-btn { display: inline-block; background: white; color: #4a9eb8; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s; }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
-        
-        .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
-        .footer a { color: #ff8e53; text-decoration: none; }
-        
+        .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
+        .site-footer a { color: #ff8e53; text-decoration: none; }
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .disease-hero h1 { font-size: 1.8rem; }
-            .main { padding-top: 5.5rem; }
+            main { padding-top: 5.5rem; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <header class="site-header" role="banner">
         <div class="header-inner">
-            <a href="index.html" class="logo-wrap">
-                <img src="logo.png" alt="PawWell" class="logo-img">
+            <a href="index.html" class="logo-wrap" aria-label="PawWell Home">
+                <img src="logo.png" alt="PawWell Logo - Dog Health Resource" class="logo-img">
             </a>
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-            <nav class="nav" id="navMenu">
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
                 <a href="index.html">Home</a>
                 <a href="assessment.html">AI Health Check</a>
-                <a href="arthritis.html">🦴 Joint</a>
-                <a href="kidney.html" style="background:#e8f4f8;color:#4a9eb8;font-weight:700;">🫘 Kidney</a>
-                <a href="heart.html">❤️ Heart</a>
+                <a href="arthritis.html">Arthritis</a>
+                <a href="kidney.html" style="background:#e8f4f8;color:#4a9eb8;font-weight:700;">Kidney Disease</a>
+                <a href="heart.html">Heart Disease</a>
                 <a href="community.html">Community</a>
             </nav>
         </div>
     </header>
 
-    <main class="main">
-        <div class="disease-hero">
-            <div class="disease-icon">🫘</div>
-            <div class="disease-badge">Silent but Treatable</div>
-            <h1>Kidney Disease in Senior Dogs</h1>
+    <main role="main">
+        <header class="disease-hero">
+            <p class="disease-badge">Silent but Treatable</p>
+            <h1>Kidney Disease in Senior Dogs: Complete Guide & Case Study</h1>
             <p>Chronic kidney disease (CKD) affects 1 in 3 senior dogs. It progresses slowly — early detection through regular vet checks can make a huge difference.</p>
-        </div>
+        </header>
 
-        <div class="section">
-            <h2><span class="icon">📖</span> What Is Kidney Disease?</h2>
-            <p>Chronic kidney disease (CKD) means the kidneys gradually lose their ability to filter waste from the blood, regulate hydration, and maintain electrolyte balance.</p>
-            <p>It is irreversible but manageable — with the right diet, medication, and monitoring, many dogs with CKD live comfortably for months to years after diagnosis.</p>
-        </div>
+        <article>
+            <section aria-labelledby="what-is-kidney">
+                <h2 id="what-is-kidney">What Is Kidney Disease in Dogs?</h2>
+                <p>Chronic kidney disease (CKD) means the kidneys gradually lose their ability to filter waste from the blood, regulate hydration, and maintain electrolyte balance.</p>
+                <p>It is irreversible but manageable — with the right diet, medication, and monitoring, many dogs with CKD live comfortably for months to years after diagnosis.</p>
+            </section>
 
-        <div class="section">
-            <h2><span class="icon">⚠️</span> Warning Signs</h2>
-            <div class="symptom-grid">
-                <div class="symptom-item"><span class="icon">🔹</span><span>Drinking significantly more water than usual</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Frequent urination or accidents in the house</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Unexplained weight loss despite normal appetite</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Loss of appetite or selective eating</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Dull, dry coat and excessive shedding</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Lethargy and weakness</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Bad breath with a chemical/ammonia smell</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Vomiting or loose stools</span></div>
-            </div>
-        </div>
+            <section aria-labelledby="kidney-symptoms">
+                <h2 id="kidney-symptoms">Warning Signs of Kidney Disease</h2>
+                <div class="symptom-grid">
+                    <article class="symptom-item"><span>Drinking significantly more water than usual</span></article>
+                    <article class="symptom-item"><span>Frequent urination or accidents in the house</span></article>
+                    <article class="symptom-item"><span>Unexplained weight loss despite normal appetite</span></article>
+                    <article class="symptom-item"><span>Loss of appetite or selective eating</span></article>
+                    <article class="symptom-item"><span>Dull, dry coat and excessive shedding</span></article>
+                    <article class="symptom-item"><span>Lethargy and weakness</span></article>
+                    <article class="symptom-item"><span>Bad breath with a chemical or ammonia smell</span></article>
+                    <article class="symptom-item"><span>Vomiting or loose stools</span></article>
+                </div>
+            </section>
 
-        <div class="section">
-            <h2><span class="icon">💡</span> Care & Management</h2>
-            <div class="tip-card">
-                <h3>🥗 Kidney-Friendly Diet</h3>
-                <p>Low-phosphorus, reduced-protein prescription diets (like Royal Canin Renal or Hill's k/d) reduce kidney workload. Always transition diet gradually under vet guidance.</p>
-            </div>
-            <div class="tip-card">
-                <h3>💧 Keep Fresh Water Available</h3>
-                <p>Dogs with kidney disease need constant access to clean water. Consider multiple water bowls, a pet fountain, or adding water to food to encourage hydration.</p>
-            </div>
-            <div class="tip-card">
-                <h3>🩺 Regular Vet Monitoring</h3>
-                <p>Blood tests every 3–6 months track kidney values (creatinine, BUN, SDMA). Early detection of worsening allows timely treatment adjustments.</p>
-            </div>
-            <div class="tip-card">
-                <h3>💊 Supplements & Medication</h3>
-                <p>Phosphate binders, omega-3 supplements, and in some cases, appetite stimulants or blood pressure medication may be prescribed by your vet.</p>
-            </div>
-            <div class="tip-card">
-                <h3>🧘 Reduce Stress</h3>
-                <p>Keep routines consistent, avoid strenuous exercise, and provide a quiet, comfortable resting space. Stress can worsen symptoms.</p>
-            </div>
-        </div>
+            <section aria-labelledby="kidney-care">
+                <h2 id="kidney-care">Kidney Disease Care & Management</h2>
+                <article class="tip-card">
+                    <h3>Kidney-Friendly Diet</h3>
+                    <p>Low-phosphorus, reduced-protein prescription diets (like Royal Canin Renal or Hill's k/d) reduce kidney workload. Always transition diet gradually under vet guidance.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Keep Fresh Water Available</h3>
+                    <p>Dogs with kidney disease need constant access to clean water. Consider multiple water bowls, a pet fountain, or adding water to food to encourage hydration.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Regular Vet Monitoring</h3>
+                    <p>Blood tests every 3–6 months track kidney values (creatinine, BUN, SDMA). Early detection of worsening allows timely treatment adjustments.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Supplements & Medication</h3>
+                    <p>Phosphate binders, omega-3 supplements, and in some cases appetite stimulants or blood pressure medication may be prescribed by your vet.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Reduce Stress</h3>
+                    <p>Keep routines consistent, avoid strenuous exercise, and provide a quiet, comfortable resting space. Stress can worsen kidney disease symptoms.</p>
+                </article>
+            </section>
 
-        <div class="cta-section">
-            <h2>Concerned About Your Dog's Kidney Health?</h2>
-            <p>Take our free AI health check to assess your dog's symptoms and get guidance.</p>
-            <a href="assessment.html" class="cta-btn">🤖 Start AI Health Check</a>
-        </div>
+            <section class="cta-section" aria-labelledby="kidney-cta">
+                <h2 id="kidney-cta">Concerned About Your Dog's Kidney Health?</h2>
+                <p>Take our free AI health check to assess your dog's symptoms and get guidance on next steps.</p>
+                <a href="assessment.html" class="cta-btn" aria-label="Start free AI Health Check for your dog">Start AI Health Check</a>
+            </section>
+        </article>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer" role="contentinfo">
         <p>© 2026 PawWell. All rights reserved.</p>
         <p style="margin-top:0.5rem;">
-            <a href="index.html">Home</a> · <a href="arthritis.html">Joint</a> · <a href="kidney.html">Kidney</a> · <a href="heart.html">Heart</a> · <a href="community.html">Community</a>
+            <a href="index.html">Home</a> ·
+            <a href="assessment.html">AI Health Check</a> ·
+            <a href="arthritis.html">Arthritis Guide</a> ·
+            <a href="kidney.html">Kidney Disease</a> ·
+            <a href="heart.html">Heart Disease</a> ·
+            <a href="community.html">Community</a>
         </p>
     </footer>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalCondition",
+      "name": "Canine Kidney Disease",
+      "alternateName": "Chronic Kidney Disease in Dogs",
+      "description": "Complete guide to kidney disease in senior dogs, including symptoms, diet tips, treatments and care management.",
+      "keywords": "kidney disease senior dogs, CKD dogs, canine kidney failure, dog kidney health",
+      "author": { "@type": "Organization", "name": "PawWell" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
+      "datePublished": "2026-07-05",
+      "about": { "@type": "MedicalEntity", "name": "Canine Chronic Kidney Disease", "category": "Urology" }
+    }
+    </script>
+
+    <script defer src="js/nav.js"></script>
     <script>
         function toggleMenu() { document.getElementById('navMenu').classList.toggle('open'); }
         document.addEventListener('click', function(e) {

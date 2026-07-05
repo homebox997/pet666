@@ -3,151 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Disease in Senior Dogs | Heart & Circulation | PawWell</title>
-    <meta name="description" content="Complete guide to heart disease in senior dogs. Learn symptoms, treatments, and how to care for dogs with heart conditions.">
+    <title>Heart Disease in Senior Dogs - Complete Guide & Case Study | PawWell</title>
+    <meta name="description" content="Complete guide to heart disease in senior dogs. Learn symptoms, treatments, medications and how to care for dogs diagnosed with heart conditions.">
     <meta name="robots" content="index, follow">
+    <!-- 数据库接口：case_db_port = 3001 -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fce8e8 0%, #fcd5d5 100%); min-height: 100vh; }
-        
-        .header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .site-header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
         .logo-wrap { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-        .logo-text { font-family: 'Fredoka', 'Segoe UI', sans-serif; font-size: 1.55rem; font-weight: 700; color: #2c3e50; letter-spacing: -0.5px; line-height: 1; }
-        .logo-text span { color: #ff6b6b; }
-        .logo-paws { display: flex; gap: 2px; font-size: 1.1rem; opacity: 0.7; }
         .logo-img { height: 40px; display: block; }
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
         .nav { display: flex; gap: 0.3rem; }
         .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
         .nav a:hover { background: #f0f0f0; }
-        
-        .main { padding: 6rem 18px 3rem; max-width: 760px; margin: 0 auto; }
-        
+        main { padding: 6rem 18px 3rem; max-width: 760px; margin: 0 auto; }
         .disease-hero { text-align: center; padding-bottom: 2rem; border-bottom: 2px solid #f5c5c5; margin-bottom: 2rem; }
-        .disease-icon { font-size: 5rem; margin-bottom: 1rem; }
         .disease-badge { display: inline-block; background: #fce8e8; color: #c0392b; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.8rem; border: 1px solid #f5b8b8; }
         .disease-hero h1 { font-size: 2.2rem; margin-bottom: 0.8rem; color: #2c3e50; }
         .disease-hero p { font-size: 1.05rem; color: #6a4a4a; line-height: 1.7; max-width: 560px; margin: 0 auto; }
-        
-        .section { margin-bottom: 2.5rem; }
-        .section h2 { font-size: 1.4rem; margin-bottom: 1rem; color: #2c3e50; display: flex; align-items: center; gap: 0.5rem; }
-        .section p { color: #6a4a4a; line-height: 1.8; margin-bottom: 0.8rem; font-size: 0.97rem; }
-        
+        section { margin-bottom: 2.5rem; }
+        section h2 { font-size: 1.4rem; margin-bottom: 1rem; color: #2c3e50; }
+        section p { color: #6a4a4a; line-height: 1.8; margin-bottom: 0.8rem; font-size: 0.97rem; }
         .symptom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
         .symptom-item { background: white; padding: 14px; border-radius: 14px; display: flex; align-items: flex-start; gap: 0.6rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .symptom-item .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
         .symptom-item span { font-size: 0.9rem; color: #3d4f63; line-height: 1.4; }
-        
         .tip-card { background: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
         .tip-card h3 { font-size: 1.05rem; color: #c0392b; margin-bottom: 0.5rem; }
         .tip-card p { font-size: 0.9rem; color: #6a4a4a; line-height: 1.6; margin: 0; }
-        
         .cta-section { background: linear-gradient(135deg, #c0392b, #e74c3c); border-radius: 20px; padding: 2.5rem; text-align: center; margin: 2.5rem 0; }
         .cta-section h2 { color: white; font-size: 1.6rem; margin-bottom: 0.5rem; }
         .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; font-size: 0.95rem; }
         .cta-btn { display: inline-block; background: white; color: #c0392b; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s; }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
-        
-        .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
-        .footer a { color: #ff8e53; text-decoration: none; }
-        
+        .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
+        .site-footer a { color: #ff8e53; text-decoration: none; }
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .disease-hero h1 { font-size: 1.8rem; }
-            .main { padding-top: 5.5rem; }
+            main { padding-top: 5.5rem; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <header class="site-header" role="banner">
         <div class="header-inner">
-            <a href="index.html" class="logo-wrap">
-                <img src="logo.png" alt="PawWell" class="logo-img">
+            <a href="index.html" class="logo-wrap" aria-label="PawWell Home">
+                <img src="logo.png" alt="PawWell Logo - Dog Health Resource" class="logo-img">
             </a>
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-            <nav class="nav" id="navMenu">
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
                 <a href="index.html">Home</a>
                 <a href="assessment.html">AI Health Check</a>
-                <a href="arthritis.html">🦴 Joint</a>
-                <a href="kidney.html">🫘 Kidney</a>
-                <a href="heart.html" style="background:#fce8e8;color:#c0392b;font-weight:700;">❤️ Heart</a>
+                <a href="arthritis.html">Arthritis</a>
+                <a href="kidney.html">Kidney Disease</a>
+                <a href="heart.html" style="background:#fce8e8;color:#c0392b;font-weight:700;">Heart Disease</a>
                 <a href="community.html">Community</a>
             </nav>
         </div>
     </header>
 
-    <main class="main">
-        <div class="disease-hero">
-            <div class="disease-icon">❤️</div>
-            <div class="disease-badge">Heart Conditions Are More Common Than You Think</div>
-            <h1>Heart Disease in Senior Dogs</h1>
+    <main role="main">
+        <header class="disease-hero">
+            <p class="disease-badge">Heart Conditions Are More Common Than You Think</p>
+            <h1>Heart Disease in Senior Dogs: Complete Guide & Case Study</h1>
             <p>Heart disease affects up to 10% of all dogs — and 75% of senior dogs develop some form of heart murmur. Early diagnosis and treatment can extend and improve your dog's life.</p>
-        </div>
+        </header>
 
-        <div class="section">
-            <h2><span class="icon">📖</span> Common Types of Heart Disease</h2>
-            <p><strong>Degenerative Valve Disease (MVD)</strong> — Most common in small-to-medium breeds. The heart valves wear out and leak blood backward. Common in Cavalier King Charles, Poodles, and Chihuahuas.</p>
-            <p><strong>Dilated Cardiomyopathy (DCM)</strong> — More common in large breeds (Dobermans, Boxers, Great Danes). The heart muscle becomes weak and can't pump effectively.</p>
-            <p><strong>Heart Murmurs</strong> — An abnormal sound heard during a heartbeat cycle. Not all murmurs are serious, but they should always be evaluated by a vet.</p>
-        </div>
+        <article>
+            <section aria-labelledby="heart-types">
+                <h2 id="heart-types">Common Types of Heart Disease in Dogs</h2>
+                <p><strong>Degenerative Valve Disease (MVD)</strong> — Most common in small-to-medium breeds. The heart valves wear out and leak blood backward. Common in Cavalier King Charles, Poodles, and Chihuahuas.</p>
+                <p><strong>Dilated Cardiomyopathy (DCM)</strong> — More common in large breeds (Dobermans, Boxers, Great Danes). The heart muscle becomes weak and cannot pump effectively.</p>
+                <p><strong>Heart Murmurs</strong> — An abnormal sound heard during a heartbeat cycle. Not all murmurs are serious, but they should always be evaluated by a vet.</p>
+            </section>
 
-        <div class="section">
-            <h2><span class="icon">⚠️</span> Warning Signs</h2>
-            <div class="symptom-grid">
-                <div class="symptom-item"><span class="icon">🔹</span><span>Persistent coughing, especially worse at night or after exercise</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Labored or rapid breathing, even at rest</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Reduced stamina and tiring quickly on walks</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Fainting or collapsing episodes</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Swollen belly (fluid buildup from heart failure)</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Pale or blue-tinged gums</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Sudden weight loss and muscle wasting</span></div>
-                <div class="symptom-item"><span class="icon">🔹</span><span>Restlessness, especially at night</span></div>
-            </div>
-        </div>
+            <section aria-labelledby="heart-symptoms">
+                <h2 id="heart-symptoms">Warning Signs of Heart Disease</h2>
+                <div class="symptom-grid">
+                    <article class="symptom-item"><span>Persistent coughing, especially worse at night or after exercise</span></article>
+                    <article class="symptom-item"><span>Labored or rapid breathing, even at rest</span></article>
+                    <article class="symptom-item"><span>Reduced stamina and tiring quickly on walks</span></article>
+                    <article class="symptom-item"><span>Fainting or collapsing episodes</span></article>
+                    <article class="symptom-item"><span>Swollen belly (fluid buildup from heart failure)</span></article>
+                    <article class="symptom-item"><span>Pale or blue-tinged gums</span></article>
+                    <article class="symptom-item"><span>Sudden weight loss and muscle wasting</span></article>
+                    <article class="symptom-item"><span>Restlessness, especially at night</span></article>
+                </div>
+            </section>
 
-        <div class="section">
-            <h2><span class="icon">💡</span> Care & Treatment</h2>
-            <div class="tip-card">
-                <h3>🩺 Regular Vet Checkups & Scans</h3>
-                <p>Annual heart checks (stethoscope exam, X-rays, blood tests, and in some cases ECG or ultrasound) are essential for monitoring progression.</p>
-            </div>
-            <div class="tip-card">
-                <h3>💊 Heart Medication</h3>
-                <p>ACE inhibitors, diuretics, and positive inotropes are commonly prescribed. Never adjust or stop medication without vet consultation.</p>
-            </div>
-            <div class="tip-card">
-                <h3>🏋️ Controlled Exercise</h3>
-                <p>Short, gentle walks are better than long or strenuous exercise. Watch for signs of fatigue, heavy panting, or rapid breathing and rest accordingly.</p>
-            </div>
-            <div class="tip-card">
-                <h3>🥗 Low-Sodium Diet</h3>
-                <p>Reducing salt intake helps minimize fluid retention. Prescription cardiac diets (Hill's h/d, Royal Canin Cardiac) are formulated for heart patients.</p>
-            </div>
-            <div class="tip-card">
-                <h3>😌 Keep Calm & Comfortable</h3>
-                <p>Stress worsens heart symptoms. Maintain a calm environment, avoid hot weather, and keep your dog at a comfortable, cool temperature.</p>
-            </div>
-        </div>
+            <section aria-labelledby="heart-care">
+                <h2 id="heart-care">Heart Disease Care & Treatment</h2>
+                <article class="tip-card">
+                    <h3>Regular Vet Checkups & Scans</h3>
+                    <p>Annual heart checks (stethoscope exam, X-rays, blood tests, and in some cases ECG or ultrasound) are essential for monitoring progression.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Heart Medication</h3>
+                    <p>ACE inhibitors, diuretics, and positive inotropes are commonly prescribed. Never adjust or stop medication without veterinary consultation.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Controlled Exercise</h3>
+                    <p>Short, gentle walks are better than long or strenuous exercise. Watch for signs of fatigue, heavy panting, or rapid breathing and rest accordingly.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Low-Sodium Diet</h3>
+                    <p>Reducing salt intake helps minimize fluid retention. Prescription cardiac diets (Hill's h/d, Royal Canin Cardiac) are formulated for heart patients.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Keep Calm & Comfortable</h3>
+                    <p>Stress worsens heart symptoms. Maintain a calm environment, avoid hot weather, and keep your dog at a comfortable, cool temperature.</p>
+                </article>
+            </section>
 
-        <div class="cta-section">
-            <h2>Notice Any Heart-Related Symptoms?</h2>
-            <p>Take our free AI health check to identify potential warning signs and get guidance on next steps.</p>
-            <a href="assessment.html" class="cta-btn">🤖 Start AI Health Check</a>
-        </div>
+            <section class="cta-section" aria-labelledby="heart-cta">
+                <h2 id="heart-cta">Notice Any Heart-Related Symptoms in Your Dog?</h2>
+                <p>Take our free AI health check to identify potential warning signs and get guidance on next steps.</p>
+                <a href="assessment.html" class="cta-btn" aria-label="Start free AI Health Check for your dog">Start AI Health Check</a>
+            </section>
+        </article>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer" role="contentinfo">
         <p>© 2026 PawWell. All rights reserved.</p>
         <p style="margin-top:0.5rem;">
-            <a href="index.html">Home</a> · <a href="arthritis.html">Joint</a> · <a href="kidney.html">Kidney</a> · <a href="heart.html">Heart</a> · <a href="community.html">Community</a>
+            <a href="index.html">Home</a> ·
+            <a href="assessment.html">AI Health Check</a> ·
+            <a href="arthritis.html">Arthritis Guide</a> ·
+            <a href="kidney.html">Kidney Disease</a> ·
+            <a href="heart.html">Heart Disease</a> ·
+            <a href="community.html">Community</a>
         </p>
     </footer>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalCondition",
+      "name": "Canine Heart Disease",
+      "alternateName": "Heart Disease in Dogs",
+      "description": "Complete guide to heart disease in senior dogs. Learn symptoms, types, treatments, medications and care for dogs with heart conditions.",
+      "keywords": "heart disease senior dogs, canine heart murmur, dog heart failure, DCM dogs, MVD dogs",
+      "author": { "@type": "Organization", "name": "PawWell" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
+      "datePublished": "2026-07-05",
+      "about": { "@type": "MedicalEntity", "name": "Canine Heart Disease", "category": "Cardiology" }
+    }
+    </script>
+
+    <script defer src="js/nav.js"></script>
     <script>
         function toggleMenu() { document.getElementById('navMenu').classList.toggle('open'); }
         document.addEventListener('click', function(e) {
