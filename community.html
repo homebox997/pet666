@@ -99,6 +99,12 @@
         .comment-input { flex: 1; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 0.9rem; font-family: inherit; }
         .comment-input:focus { outline: none; border-color: #ff6b6b; }
         .comment-send { padding: 10px 18px; background: #ff6b6b; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+        /* ====== DOG BREED STATS ====== */
+        .breed-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; }
+        .breed-icon { font-size: 1rem; flex-shrink: 0; }
+        .breed-name { flex: 1; font-size: 0.83rem; color: #2c3e50; font-weight: 600; }
+        .breed-count { font-size: 0.75rem; color: #aaa; white-space: nowrap; }
+        .breed-bar { height: 3px; background: #f0f0f0; border-radius: 2px; margin: 1px 0 6px; width: var(--pct, 50%); }
         /* ====== FOOTER ====== */
         .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
         .site-footer a { color: #ff8e53; text-decoration: none; }
@@ -183,6 +189,27 @@
                 <div class="stat-row"><span>Health Cases Shared</span><strong>48</strong></div>
                 <div class="stat-row"><span>Questions Answered</span><strong>89</strong></div>
                 <div class="stat-row"><span>Active Members</span><strong>312</strong></div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Popular Dog Breeds Here</h3>
+                <div class="breed-row"><span class="breed-icon">🦡</span><span class="breed-name">Golden Retriever</span><span class="breed-count">48 members</span></div>
+                <div class="breed-bar" style="--pct:72%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐶</span><span class="breed-name">Cavalier King Charles</span><span class="breed-count">36 members</span></div>
+                <div class="breed-bar" style="--pct:54%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕</span><span class="breed-name">Labrador</span><span class="breed-count">31 members</span></div>
+                <div class="breed-bar" style="--pct:46%;"></div>
+                <div class="breed-row"><span class="breed-icon">🦮</span><span class="breed-name">German Shepherd</span><span class="breed-count">27 members</span></div>
+                <div class="breed-bar" style="--pct:40%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕‍🦺</span><span class="breed-name">Border Collie</span><span class="breed-count">22 members</span></div>
+                <div class="breed-bar" style="--pct:33%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐩</span><span class="breed-name">Poodle / Cavoodle</span><span class="breed-count">19 members</span></div>
+                <div class="breed-bar" style="--pct:28%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐶</span><span class="breed-name">French Bulldog</span><span class="breed-count">16 members</span></div>
+                <div class="breed-bar" style="--pct:24%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕</span><span class="breed-name">Maltese</span><span class="breed-count">12 members</span></div>
+                <div class="breed-bar" style="--pct:18%;"></div>
+                <p style="font-size:0.72rem;color:#aaa;margin-top:0.5rem;">Based on 312 community members</p>
             </div>
 
             <div class="sidebar-card">
