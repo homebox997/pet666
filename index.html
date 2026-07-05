@@ -11,12 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
         
-        .paw-bg { position: fixed; font-size: 40px; opacity: 0.05; pointer-events: none; z-index: 0; }
-        .paw-bg-1 { top: 8%; left: 4%; transform: rotate(-20deg); }
-        .paw-bg-2 { top: 22%; right: 6%; transform: rotate(15deg); }
-        .paw-bg-3 { bottom: 28%; left: 10%; transform: rotate(-10deg); }
-        .paw-bg-4 { bottom: 10%; right: 12%; transform: rotate(25deg); }
-        
         /* Header */
         .header { background: rgba(255, 255, 255, 0.97); padding: 0.9rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
@@ -28,25 +22,26 @@
         .nav a.highlight { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
         
         /* Hero */
-        .hero { padding: 7rem 18px 2.5rem; text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero { padding: 7rem 18px 2rem; text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
         
-        /* Paw Walking Animation */
-        .paw-walk { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 1.5rem; }
-        .paw { font-size: 80px; display: inline-block; transition: opacity 0.25s ease, transform 0.25s ease; }
-        .paw.left { animation: pawLeft 1s ease-in-out infinite; }
-        .paw.right { animation: pawRight 1s ease-in-out infinite; animation-delay: 0.5s; }
-        @keyframes pawLeft {
-            0%, 100% { opacity: 0.15; transform: translateY(0) scale(0.9); }
-            50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
-        }
-        @keyframes pawRight {
-            0%, 100% { opacity: 1; transform: translateY(-10px) scale(1.1); }
-            50% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+        /* Walking Paws - 4 paws scrolling left to right */
+        .paw-trail { display: flex; justify-content: center; align-items: flex-end; gap: 8px; margin-bottom: 1.5rem; overflow: hidden; height: 80px; }
+        .paw-walk { font-size: 56px; display: inline-block; animation: pawWalk 2.4s ease-in-out infinite; }
+        .paw-walk:nth-child(1) { animation-delay: 0s; }
+        .paw-walk:nth-child(2) { animation-delay: 0.4s; }
+        .paw-walk:nth-child(3) { animation-delay: 0.8s; }
+        .paw-walk:nth-child(4) { animation-delay: 1.2s; }
+        @keyframes pawWalk {
+            0%   { opacity: 0; transform: translateY(30px) scale(0.7); }
+            15%  { opacity: 1; transform: translateY(0) scale(1); }
+            70%  { opacity: 1; transform: translateY(-20px) scale(1.1); }
+            85%  { opacity: 0.3; transform: translateY(-30px) scale(0.9); }
+            100% { opacity: 0; transform: translateY(-40px) scale(0.7); }
         }
         
         .hero h1 { font-size: 2.4rem; margin-bottom: 0.8rem; line-height: 1.2; }
         .hero h1 span { background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 480px; margin: 0 auto 1.5rem; }
+        .hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 480px; margin: 0 auto 0.5rem; }
         
         /* Big Buttons */
         .big-buttons { padding: 0 18px 2rem; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
@@ -63,8 +58,17 @@
         .big-btn-blog { background: white; color: #2c3e50; border: 2px solid #e0e0e0; }
         .big-btn-blog:hover { border-color: #ff6b6b; color: #ff6b6b; }
         
+        /* Three Health Areas */
+        .health-areas { padding: 0 18px 1.5rem; max-width: 700px; margin: 0 auto; }
+        .health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .health-card { background: white; border-radius: 18px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.07); transition: all 0.3s; }
+        .health-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(0,0,0,0.12); }
+        .health-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+        .health-card h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.3rem; }
+        .health-card p { font-size: 0.8rem; color: #7a8a9a; line-height: 1.4; }
+        
         /* Stats Bar */
-        .stats-bar { background: white; border-radius: 14px; padding: 1rem 1.5rem; margin: 0 18px 2rem; max-width: 480px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+        .stats-bar { background: white; border-radius: 14px; padding: 1rem 1.5rem; margin: 0 18px 2rem; max-width: 700px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
         .stats-bar p { text-align: center; font-size: 0.88rem; color: #7a8a9a; }
         .stats-bar strong { color: #ff6b6b; }
         
@@ -95,17 +99,16 @@
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .hero h1 { font-size: 2rem; }
-            .paw { font-size: 60px; }
+            .health-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 0.6rem; }
+            .health-card { padding: 1rem 0.5rem; }
+            .health-icon { font-size: 2rem; }
+            .health-card h3 { font-size: 0.8rem; }
+            .health-card p { font-size: 0.72rem; }
             .big-btn { padding: 16px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="paw-bg paw-bg-1">🐾</div>
-    <div class="paw-bg paw-bg-2">🐾</div>
-    <div class="paw-bg paw-bg-3">🐾</div>
-    <div class="paw-bg paw-bg-4">🐾</div>
-
     <header class="header">
         <div class="header-inner">
             <div class="logo">🐾 Senior Dog Health</div>
@@ -120,10 +123,12 @@
     </header>
 
     <section class="hero">
-        <!-- Walking Paws Animation -->
-        <div class="paw-walk">
-            <span class="paw left">🐾</span>
-            <span class="paw right">🐾</span>
+        <!-- 4 Paws Walking -->
+        <div class="paw-trail">
+            <span class="paw-walk">🐾</span>
+            <span class="paw-walk">🐾</span>
+            <span class="paw-walk">🐾</span>
+            <span class="paw-walk">🐾</span>
         </div>
         <h1>Help Your <span>Senior Dog</span> Live Better</h1>
         <p>Free AI health check for dogs 7+ years. Early detection of arthritis, kidney & heart conditions.</p>
@@ -154,6 +159,27 @@
             </div>
             <div class="big-btn-arrow">→</div>
         </a>
+    </div>
+
+    <!-- Three Health Areas -->
+    <div class="health-areas">
+        <div class="health-grid">
+            <div class="health-card">
+                <div class="health-icon">🦴</div>
+                <h3>Joint & Mobility</h3>
+                <p>Arthritis, hip dysplasia, stiffness & pain management</p>
+            </div>
+            <div class="health-card">
+                <div class="health-icon">🫘</div>
+                <h3>Kidney & Urinary</h3>
+                <p>Chronic kidney disease, excessive thirst & urinary issues</p>
+            </div>
+            <div class="health-card">
+                <div class="health-icon">❤️</div>
+                <h3>Heart & Circulation</h3>
+                <p>Heart murmurs, coughing & breathing difficulties</p>
+            </div>
+        </div>
     </div>
 
     <div class="stats-bar">
