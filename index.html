@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senior Dog Health Hub | AI-Powered Pet Care</title>
-    <meta name="description" content="Free AI health assessment for senior dogs. Expert guidance on arthritis, kidney disease, and heart conditions.">
+    <title>PawWell | Smart Health for Your Aging Dog</title>
+    <meta name="description" content="Free AI health check for senior dogs. Expert guidance on arthritis, kidney disease, and heart conditions.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://agedpawwell.com/">
     <style>
@@ -12,9 +12,13 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
         
         /* Header */
-        .header { background: rgba(255, 255, 255, 0.97); padding: 0.9rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header { background: rgba(255, 255, 255, 0.97); padding: 0.85rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Logo - top left */
+        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: #2c3e50; letter-spacing: -0.5px; }
+        .logo span { color: #ff6b6b; }
+        
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
         .nav { display: flex; gap: 0.3rem; }
         .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
@@ -24,24 +28,19 @@
         /* Hero */
         .hero { padding: 7rem 18px 2rem; text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
         
-        /* Walking Paws - 4 paws scrolling left to right */
-        .paw-trail { display: flex; justify-content: center; align-items: flex-end; gap: 8px; margin-bottom: 1.5rem; overflow: hidden; height: 80px; }
-        .paw-walk { font-size: 56px; display: inline-block; animation: pawWalk 2.4s ease-in-out infinite; }
-        .paw-walk:nth-child(1) { animation-delay: 0s; }
-        .paw-walk:nth-child(2) { animation-delay: 0.4s; }
-        .paw-walk:nth-child(3) { animation-delay: 0.8s; }
-        .paw-walk:nth-child(4) { animation-delay: 1.2s; }
-        @keyframes pawWalk {
-            0%   { opacity: 0; transform: translateY(30px) scale(0.7); }
-            15%  { opacity: 1; transform: translateY(0) scale(1); }
-            70%  { opacity: 1; transform: translateY(-20px) scale(1.1); }
-            85%  { opacity: 0.3; transform: translateY(-30px) scale(0.9); }
-            100% { opacity: 0; transform: translateY(-40px) scale(0.7); }
+        /* 2 Paws Scrolling Left → Right */
+        .paw-scroll { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 1.5rem; overflow: hidden; width: 200px; margin-left: auto; margin-right: auto; }
+        .paw-track { display: flex; align-items: center; animation: pawScroll 2s linear infinite; gap: 0; }
+        .paw-item { font-size: 64px; flex-shrink: 0; display: inline-block; padding: 0 20px; }
+        @keyframes pawScroll {
+            0%   { transform: translateX(-80px); }
+            100% { transform: translateX(-280px); }
         }
         
-        .hero h1 { font-size: 2.4rem; margin-bottom: 0.8rem; line-height: 1.2; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 0.5rem; line-height: 1.2; }
         .hero h1 span { background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 480px; margin: 0 auto 0.5rem; }
+        .slogan { font-size: 0.95rem; color: #ff6b6b; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
         
         /* Big Buttons */
         .big-buttons { padding: 0 18px 2rem; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
@@ -61,7 +60,7 @@
         /* Three Health Areas */
         .health-areas { padding: 0 18px 1.5rem; max-width: 700px; margin: 0 auto; }
         .health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .health-card { background: white; border-radius: 18px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.07); transition: all 0.3s; }
+        .health-card { background: white; border-radius: 18px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.07); transition: all 0.3s; cursor: pointer; }
         .health-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(0,0,0,0.12); }
         .health-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
         .health-card h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.3rem; }
@@ -99,6 +98,11 @@
             .nav.open { display: flex; }
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .hero h1 { font-size: 2rem; }
+            .paw-item { font-size: 52px; padding: 0 14px; }
+            @keyframes pawScroll {
+                0%   { transform: translateX(-64px); }
+                100% { transform: translateX(-220px); }
+            }
             .health-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 0.6rem; }
             .health-card { padding: 1rem 0.5rem; }
             .health-icon { font-size: 2rem; }
@@ -111,7 +115,7 @@
 <body>
     <header class="header">
         <div class="header-inner">
-            <div class="logo">🐾 Senior Dog Health</div>
+            <a href="index.html" class="logo">Paw<span>Well</span></a>
             <button class="hamburger" onclick="toggleMenu()">☰</button>
             <nav class="nav" id="navMenu">
                 <a href="index.html" class="highlight">Home</a>
@@ -123,14 +127,18 @@
     </header>
 
     <section class="hero">
-        <!-- 4 Paws Walking -->
-        <div class="paw-trail">
-            <span class="paw-walk">🐾</span>
-            <span class="paw-walk">🐾</span>
-            <span class="paw-walk">🐾</span>
-            <span class="paw-walk">🐾</span>
+        <!-- 2 Paws scrolling left → right -->
+        <div class="paw-scroll">
+            <div class="paw-track">
+                <span class="paw-item">🐾</span>
+                <span class="paw-item">🐾</span>
+                <span class="paw-item">🐾</span>
+                <span class="paw-item">🐾</span>
+            </div>
         </div>
+        
         <h1>Help Your <span>Senior Dog</span> Live Better</h1>
+        <div class="slogan">🐾 Smart Health for Your Aging Dog</div>
         <p>Free AI health check for dogs 7+ years. Early detection of arthritis, kidney & heart conditions.</p>
     </section>
 
@@ -229,7 +237,7 @@
     </section>
 
     <footer class="footer">
-        <p>© 2026 Senior Dog Health Hub. All rights reserved.</p>
+        <p>© 2026 PawWell. All rights reserved.</p>
         <p style="margin-top: 0.5rem;">
             <a href="index.html">Home</a> · 
             <a href="assessment.html">AI Check</a> · 
