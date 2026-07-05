@@ -3,304 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Health Assessment | Senior Dog Health</title>
+    <title>AI Health Check | Senior Dog Health</title>
     <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://agedpawwell.com/assessment.html">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
         
-        .paw-bg { position: fixed; font-size: 40px; opacity: 0.04; pointer-events: none; z-index: 0; }
-        .paw-1 { top: 15%; left: 8%; transform: rotate(-15deg); }
-        .paw-2 { top: 40%; right: 10%; transform: rotate(20deg); }
-        .paw-3 { bottom: 25%; left: 5%; transform: rotate(-8deg); }
-        .paw-4 { bottom: 10%; right: 12%; transform: rotate(18deg); }
-        
-        .header { background: rgba(255, 255, 255, 0.95); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header { background: rgba(255, 255, 255, 0.97); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .logo { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
-        .nav { display: flex; gap: 0.5rem; }
-        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 10px 16px; border-radius: 25px; transition: all 0.3s; font-size: 0.95rem; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
         .nav a:hover { background: #f5f5f5; }
         .nav a.highlight { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
         
-        .progress-section { padding: 5.5rem 18px 1rem; max-width: 600px; margin: 0 auto; }
-        .progress-bar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
-        .progress-step { flex: 1; height: 8px; background: #e0e0e0; border-radius: 4px; transition: all 0.3s; }
-        .progress-step.active { background: linear-gradient(135deg, #ff6b6b, #ff8e53); }
-        .progress-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #999; }
-        .progress-labels span.active { color: #ff6b6b; font-weight: 600; }
+        .main { padding: 5.5rem 18px 3rem; max-width: 560px; margin: 0 auto; }
         
-        .form-section { padding: 1rem 18px 3rem; max-width: 600px; margin: 0 auto; }
-        .form-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); display: none; }
-        .form-card.active { display: block; }
-        .form-card h2 { font-size: 1.6rem; margin-bottom: 0.5rem; color: #2c3e50; }
-        .form-card p { color: #7a8a9a; margin-bottom: 1.5rem; }
+        .dog-icon { font-size: 64px; text-align: center; margin-bottom: 1.5rem; display: inline-block; animation: headShake 2s ease-in-out infinite; transform-origin: center bottom; }
+        @keyframes headShake {
+            0%, 100% { transform: rotate(0deg); }
+            15% { transform: rotate(-12deg); }
+            30% { transform: rotate(10deg); }
+            45% { transform: rotate(-8deg); }
+            60% { transform: rotate(6deg); }
+            75% { transform: rotate(-3deg); }
+            90% { transform: rotate(1deg); }
+        }
         
-        .form-group { margin-bottom: 1.3rem; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #2c3e50; }
-        .form-group input[type="text"], .form-group input[type="number"], .form-group input[type="email"] { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
+        .section-title { text-align: center; font-size: 1.5rem; margin-bottom: 0.3rem; }
+        .section-sub { text-align: center; color: #7a8a9a; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        
+        .form-card { background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+        
+        .form-page { display: none; }
+        .form-page.active { display: block; }
+        
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.92rem; color: #2c3e50; }
+        .form-group input[type="text"], .form-group input[type="email"] { width: 100%; padding: 13px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
         .form-group input:focus { outline: none; border-color: #ff6b6b; }
         
-        .breed-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-        .breed-option { display: none; }
-        .breed-option + label { display: block; padding: 14px 12px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 0.9rem; background: #f8f9fa; }
-        .breed-option:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
+        /* Custom Select */
+        .custom-select { position: relative; }
+        .select-trigger { padding: 13px 14px; border: 2px solid #e0e0e0; border-radius: 12px; background: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; transition: all 0.3s; min-height: 50px; }
+        .select-trigger:hover, .select-trigger.open { border-color: #ff6b6b; }
+        .select-trigger .arrow { font-size: 0.8rem; transition: transform 0.3s; }
+        .select-trigger.open .arrow { transform: rotate(180deg); }
+        .select-trigger .placeholder { color: #aaa; }
+        .select-trigger .selected-text { color: #2c3e50; font-weight: 600; }
+        .select-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: white; border: 2px solid #ff6b6b; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 100; display: none; overflow: hidden; }
+        .select-dropdown.open { display: block; }
+        .select-search { padding: 10px; border-bottom: 1px solid #eee; }
+        .select-search input { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 0.9rem; }
+        .select-search input:focus { outline: none; border-color: #ff6b6b; }
+        .select-options { max-height: 240px; overflow-y: auto; }
+        .select-option { padding: 12px 14px; cursor: pointer; transition: background 0.2s; font-size: 0.95rem; }
+        .select-option:hover { background: #fff5f0; }
+        .select-option.selected { background: #fff0eb; color: #ff6b6b; font-weight: 600; }
         
-        .gender-options { display: flex; gap: 1rem; }
-        .gender-option { flex: 1; }
-        .gender-option input { display: none; }
-        .gender-option label { display: block; padding: 18px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1.1rem; background: #f8f9fa; }
-        .gender-option input:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
-        
-        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-        .checkbox-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; cursor: pointer; }
+        /* Checkboxes */
+        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 11px 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; cursor: pointer; }
         .checkbox-item:hover { background: #fff0eb; }
         .checkbox-item.checked { background: #fff0eb; border: 1.5px solid #ff6b6b; }
-        .checkbox-item input { margin-top: 3px; width: 18px; height: 18px; cursor: pointer; flex-shrink: 0; accent-color: #ff6b6b; }
-        .checkbox-item label { flex: 1; font-size: 0.92rem; line-height: 1.4; cursor: pointer; color: #2c3e50; }
+        .checkbox-item input { margin-top: 2px; width: 18px; height: 18px; cursor: pointer; accent-color: #ff6b6b; flex-shrink: 0; }
+        .checkbox-item label { flex: 1; font-size: 0.9rem; line-height: 1.4; cursor: pointer; color: #2c3e50; }
         
-        .btn-group { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
-        .btn { padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; }
-        .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); }
-        .btn-secondary { background: white; color: #ff6b6b; border: 2px solid #ff6b6b; }
+        /* Buttons */
+        .btn { display: block; width: 100%; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-align: center; text-decoration: none; }
+        .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; box-shadow: 0 6px 20px rgba(255,107,107,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,107,107,0.4); }
+        .btn-secondary { background: white; color: #ff6b6b; border: 2px solid #ff6b6b; margin-top: 0.8rem; }
         .btn-secondary:hover { background: #fff5f0; }
-        .btn-full { width: 100%; }
         
         /* Report Card */
         .report-card { display: none; }
         .report-card.active { display: block; }
         .report-header { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; padding: 1.5rem; border-radius: 16px 16px 0 0; text-align: center; }
-        .report-header h2 { font-size: 1.4rem; margin-bottom: 0.3rem; }
-        .report-header p { font-size: 0.9rem; opacity: 0.9; }
+        .report-header h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .report-header p { font-size: 0.88rem; opacity: 0.9; }
         .report-body { background: white; padding: 1.5rem; border-radius: 0 0 16px 16px; }
-        .report-section { margin-bottom: 1.5rem; }
-        .report-section h3 { font-size: 1rem; color: #ff6b6b; margin-bottom: 0.5rem; border-bottom: 2px solid #ffe8d6; padding-bottom: 0.3rem; }
-        .report-section p { font-size: 0.92rem; color: #5a6c7d; line-height: 1.6; }
-        .report-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-        .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .report-section { margin-bottom: 1.3rem; }
+        .report-section h3 { font-size: 0.95rem; color: #ff6b6b; margin-bottom: 0.4rem; border-bottom: 2px solid #ffe8d6; padding-bottom: 0.3rem; }
+        .report-section p { font-size: 0.88rem; color: #5a6c7d; line-height: 1.6; }
+        .report-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
         .tag-joint { background: #fff0eb; color: #ff6b6b; }
         .tag-kidney { background: #e8f4f8; color: #4a9eb8; }
         .tag-heart { background: #fce8e8; color: #c0392b; }
         .tag-skin { background: #fff9e6; color: #d4a000; }
         .tag-digest { background: #e8f8e8; color: #27ae60; }
-        .report-note { background: #f8f9fa; padding: 1rem; border-radius: 12px; font-size: 0.85rem; color: #7a8a9a; line-height: 1.5; border-left: 3px solid #ff6b6b; }
-        .report-footer { text-align: center; margin-top: 1.5rem; }
+        .tag-neuro { background: #f0ebff; color: #7c3aed; }
+        .report-note { background: #f8f9fa; padding: 0.9rem; border-radius: 10px; font-size: 0.83rem; color: #7a8a9a; line-height: 1.5; border-left: 3px solid #ff6b6b; margin-top: 0.5rem; }
         
         .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 3rem; }
         .footer a { color: #ff8e53; text-decoration: none; }
         
         @media (max-width: 768px) {
-            .header-inner { position: relative; }
             .hamburger { display: block; }
-            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 1rem; gap: 0.5rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
             .nav.open { display: flex; }
-            .nav a { text-align: center; padding: 12px; width: 100%; }
-            .form-card { padding: 1.5rem; }
-            .breed-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem; }
-            .breed-option + label { padding: 12px 8px; font-size: 0.85rem; }
-            .gender-option label { padding: 16px; font-size: 1rem; }
-            .progress-labels { font-size: 0.6rem; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .form-card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="paw-bg paw-1">🐾</div>
-    <div class="paw-bg paw-2">🐾</div>
-    <div class="paw-bg paw-3">🐾</div>
-    <div class="paw-bg paw-4">🐾</div>
-
     <header class="header">
         <div class="header-inner">
             <a href="index.html" class="logo">🐾 Senior Dog Health</a>
             <button class="hamburger" onclick="toggleMenu()">☰</button>
             <nav class="nav" id="navMenu">
+                <a href="index.html">Home</a>
                 <a href="assessment.html" class="highlight">AI Health Check</a>
                 <a href="community.html">Community</a>
-                <a href="index.html#diseases">Diseases Guide</a>
                 <a href="index.html#blog">Blog</a>
             </nav>
         </div>
     </header>
 
-    <section class="progress-section">
-        <div class="progress-bar">
-            <div class="progress-step active" id="step1Bar"></div>
-            <div class="progress-step" id="step2Bar"></div>
-            <div class="progress-step" id="step3Bar"></div>
-            <div class="progress-step" id="step4Bar"></div>
-        </div>
-        <div class="progress-labels">
-            <span id="label1" class="active">Breed</span>
-            <span id="label2">Gender</span>
-            <span id="label3">Name</span>
-            <span id="label4">Symptoms</span>
-        </div>
-    </section>
-
-    <section class="form-section">
-        <!-- Step 1: Breed -->
-        <div class="form-card active" id="step1">
-            <h2>What breed is your dog?</h2>
-            <p>Select your dog's breed from the list below.</p>
-            <div class="breed-grid">
-                <div><input type="radio" name="breed" id="b1" value="Cavoodle"><label for="b1">Cavoodle</label></div>
-                <div><input type="radio" name="breed" id="b2" value="Labrador"><label for="b2">Labrador</label></div>
-                <div><input type="radio" name="breed" id="b3" value="Golden Retriever"><label for="b3">Golden Retriever</label></div>
-                <div><input type="radio" name="breed" id="b4" value="French Bulldog"><label for="b4">French Bulldog</label></div>
-                <div><input type="radio" name="breed" id="b5" value="German Shepherd"><label for="b5">German Shepherd</label></div>
-                <div><input type="radio" name="breed" id="b6" value="Border Collie"><label for="b6">Border Collie</label></div>
-                <div><input type="radio" name="breed" id="b7" value="Groodle"><label for="b7">Groodle</label></div>
-                <div><input type="radio" name="breed" id="b8" value="Mini Dachshund"><label for="b8">Mini Dachshund</label></div>
-                <div><input type="radio" name="breed" id="b9" value="Poodle"><label for="b9">Poodle</label></div>
-                <div><input type="radio" name="breed" id="b10" value="Cavalier King Charles"><label for="b10">Cavalier King Charles</label></div>
-                <div><input type="radio" name="breed" id="b11" value="Australian Kelpie"><label for="b11">Australian Kelpie</label></div>
-                <div><input type="radio" name="breed" id="b12" value="Staffy"><label for="b12">Staffy</label></div>
-                <div><input type="radio" name="breed" id="b13" value="Labradoodle"><label for="b13">Labradoodle</label></div>
-                <div><input type="radio" name="breed" id="b14" value="Spoodle"><label for="b14">Spoodle</label></div>
-                <div><input type="radio" name="breed" id="b15" value="Chihuahua"><label for="b15">Chihuahua</label></div>
-                <div><input type="radio" name="breed" id="b16" value="Maltese"><label for="b16">Maltese</label></div>
-            </div>
-            <div class="btn-group" style="justify-content: flex-end;">
-                <button class="btn btn-primary" onclick="goToStep(2)">Next →</button>
-            </div>
-        </div>
-
-        <!-- Step 2: Gender -->
-        <div class="form-card" id="step2">
-            <h2>What is your dog's gender?</h2>
-            <p>Select the appropriate option.</p>
-            <div class="gender-options">
-                <div class="gender-option">
-                    <input type="radio" name="gender" id="male" value="Male">
-                    <label for="male">♂ Male</label>
-                </div>
-                <div class="gender-option">
-                    <input type="radio" name="gender" id="female" value="Female">
-                    <label for="female">♀ Female</label>
-                </div>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
-                <button class="btn btn-primary" onclick="goToStep(3)">Next →</button>
-            </div>
-        </div>
-
-        <!-- Step 3: Nickname -->
-        <div class="form-card" id="step3">
-            <h2>What's your dog's nickname?</h2>
-            <p>Enter a name or nickname for your dog.</p>
-            <div class="form-group">
-                <label>Nickname</label>
-                <input type="text" id="nickname" placeholder="e.g. Buddy, Max, Bella...">
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
-                <button class="btn btn-primary" onclick="goToStep(4)">Next →</button>
-            </div>
-        </div>
-
-        <!-- Step 4: Symptoms + Email + Submit -->
-        <div class="form-card" id="step4">
-            <h2>Any symptoms noticed?</h2>
-            <p>Tap to select all symptoms you've observed.</p>
-            <div class="checkbox-grid">
-                <div class="checkbox-item" onclick="toggleCheck('s1')">
-                    <input type="checkbox" id="s1" value="Stiff joints, reduced mobility">
-                    <label for="s1">Stiff joints, reduced mobility</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s2')">
-                    <input type="checkbox" id="s2" value="Weak hind legs and lameness">
-                    <label for="s2">Weak hind legs and lameness</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s3')">
-                    <input type="checkbox" id="s3" value="Excessive thirst and increased urination">
-                    <label for="s3">Excessive thirst and increased urination</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s4')">
-                    <input type="checkbox" id="s4" value="Frequent nighttime urination">
-                    <label for="s4">Frequent nighttime urination</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s5')">
-                    <input type="checkbox" id="s5" value="Vision loss, bumping into things">
-                    <label for="s5">Vision loss, bumping into things</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s6')">
-                    <input type="checkbox" id="s6" value="Hearing loss, slow response">
-                    <label for="s6">Hearing loss, slow response</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s7')">
-                    <input type="checkbox" id="s7" value="Dry coat and excessive shedding">
-                    <label for="s7">Dry coat and excessive shedding</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s8')">
-                    <input type="checkbox" id="s8" value="Poor appetite, reduced food intake">
-                    <label for="s8">Poor appetite, reduced food intake</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s9')">
-                    <input type="checkbox" id="s9" value="Abnormally increased appetite">
-                    <label for="s9">Abnormally increased appetite</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s10')">
-                    <input type="checkbox" id="s10" value="Unexplained continuous weight loss">
-                    <label for="s10">Unexplained continuous weight loss</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s11')">
-                    <input type="checkbox" id="s11" value="Low stamina, lack of willingness to walk">
-                    <label for="s11">Low stamina, lack of willingness to walk</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s12')">
-                    <input type="checkbox" id="s12" value="Chronic cough worse after exercise">
-                    <label for="s12">Chronic cough worse after exercise</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s13')">
-                    <input type="checkbox" id="s13" value="Resting rapid breathing">
-                    <label for="s13">Resting rapid breathing</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s14')">
-                    <input type="checkbox" id="s14" value="Urinary or fecal incontinence">
-                    <label for="s14">Urinary or fecal incontinence</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s15')">
-                    <input type="checkbox" id="s15" value="Cognitive confusion, repetitive circling">
-                    <label for="s15">Cognitive confusion, repetitive circling</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s16')">
-                    <input type="checkbox" id="s16" value="Pale gums, poor circulation">
-                    <label for="s16">Pale gums, poor circulation</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s17')">
-                    <input type="checkbox" id="s17" value="Recurrent itching and skin inflammation">
-                    <label for="s17">Recurrent itching and skin inflammation</label>
-                </div>
-                <div class="checkbox-item" onclick="toggleCheck('s18')">
-                    <input type="checkbox" id="s18" value="Frequent vomiting and loose stools">
-                    <label for="s18">Frequent vomiting and loose stools</label>
-                </div>
+    <main class="main">
+        <!-- Page 1: Breed + Gender + Nickname + Next -->
+        <div class="form-page active" id="page1">
+            <div style="text-align:center;">
+                <div class="dog-icon">🐕</div>
+                <h1 class="section-title">AI Health Check</h1>
+                <p class="section-sub">Step 1 of 2 — Tell us about your dog</p>
             </div>
             
-            <div class="form-group" style="margin-top: 1.5rem;">
-                <label>Your Email (to receive full report)</label>
-                <input type="email" id="email" placeholder="you@example.com">
-            </div>
-            
-            <button class="btn btn-primary btn-full" onclick="submitForm()" style="margin-top: 0.5rem;">
-                🐾 Get My Report
-            </button>
-            
-            <div class="btn-group" style="margin-top: 1rem;">
-                <button class="btn btn-secondary" onclick="goToStep(3)" style="width: 100%;">← Back</button>
+            <div class="form-card">
+                <!-- Breed Select -->
+                <div class="form-group">
+                    <label>Breed *</label>
+                    <div class="custom-select" id="breedSelect">
+                        <div class="select-trigger" onclick="toggleSelect('breedSelect')">
+                            <span class="placeholder">Select breed...</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="select-dropdown" id="breedDropdown">
+                            <div class="select-search">
+                                <input type="text" placeholder="Search breed..." oninput="filterOptions('breed', this.value)">
+                            </div>
+                            <div class="select-options" id="breedOptions"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gender Select -->
+                <div class="form-group">
+                    <label>Gender *</label>
+                    <div class="custom-select" id="genderSelect">
+                        <div class="select-trigger" onclick="toggleSelect('genderSelect')">
+                            <span class="placeholder">Select gender...</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="select-dropdown" id="genderDropdown">
+                            <div class="select-options" id="genderOptions"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nickname -->
+                <div class="form-group">
+                    <label>Nickname</label>
+                    <input type="text" id="nickname" placeholder="e.g. Buddy, Max, Bella...">
+                </div>
+                
+                <button class="btn btn-primary" onclick="goToPage2()">Next →</button>
             </div>
         </div>
 
-        <!-- Result: Instant Brief Report -->
+        <!-- Page 2: Symptoms + Email + Submit -->
+        <div class="form-page" id="page2">
+            <div style="text-align:center;">
+                <div class="dog-icon">🐕</div>
+                <h1 class="section-title">Symptoms Check</h1>
+                <p class="section-sub">Step 2 of 2 — Select all symptoms noticed</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="checkbox-grid" id="symptomsGrid"></div>
+                
+                <div class="form-group" style="margin-top: 1.2rem;">
+                    <label>Your Email (to receive full report)</label>
+                    <input type="email" id="email" placeholder="you@example.com">
+                </div>
+                
+                <button class="btn btn-primary" onclick="submitForm()">🐾 Get My Report</button>
+                <button class="btn btn-secondary" onclick="goToPage1()">← Back</button>
+            </div>
+        </div>
+
+        <!-- Result: Instant Report -->
         <div class="report-card" id="report">
             <div class="report-header">
-                <h2>🦴 <span id="reportBreed">Dog</span>'s Health Report</h2>
-                <p>Analysis based on <span id="reportCount">0</span> symptoms detected</p>
+                <h2>🦴 <span id="reportDog">Dog</span>'s Health Report</h2>
+                <p><span id="reportCount">0</span> symptom(s) detected</p>
             </div>
             <div class="report-body">
                 <div class="report-section">
@@ -312,22 +212,22 @@
                     <p id="reportSummary"></p>
                 </div>
                 <div class="report-section">
-                    <h3>💡 Top Recommendations</h3>
+                    <h3>💡 Recommendations</h3>
                     <p id="reportRec"></p>
                 </div>
                 <div class="report-note">
-                    📧 A detailed report with breed-specific advice and actionable care plan has been sent to <strong id="reportEmail"></strong>.
+                    📧 A detailed report has been sent to <strong id="reportEmail"></strong>
                 </div>
-                <div class="report-footer">
-                    <a href="index.html" class="btn btn-primary">← Back to Home</a>
+                <div style="margin-top:1.2rem;">
+                    <a href="index.html" class="btn btn-primary" style="display:block;">← Back to Home</a>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
     <footer class="footer">
         <p>© 2026 Senior Dog Health Hub</p>
-        <p style="margin-top: 0.5rem;">
+        <p style="margin-top:0.5rem;">
             <a href="index.html">Home</a> · 
             <a href="assessment.html">AI Check</a> · 
             <a href="community.html">Community</a>
@@ -335,13 +235,113 @@
     </footer>
 
     <script>
+        // Data
+        var breeds = ['Cavoodle','Labrador','Golden Retriever','French Bulldog','German Shepherd','Border Collie','Groodle','Mini Dachshund','Poodle','Cavalier King Charles','Australian Kelpie','Staffy','Labradoodle','Spoodle','Chihuahua','Maltese'];
+        var genders = ['Male','Female'];
+        var symptoms = [
+            'Stiff joints, reduced mobility',
+            'Weak hind legs and lameness',
+            'Excessive thirst and increased urination',
+            'Frequent nighttime urination',
+            'Vision loss, bumping into things',
+            'Hearing loss, slow response',
+            'Dry coat and excessive shedding',
+            'Poor appetite, reduced food intake',
+            'Abnormally increased appetite',
+            'Unexplained continuous weight loss',
+            'Low stamina, lack of willingness to walk',
+            'Chronic cough worse after exercise',
+            'Resting rapid breathing',
+            'Urinary or fecal incontinence',
+            'Cognitive confusion, repetitive circling',
+            'Pale gums, poor circulation',
+            'Recurrent itching and skin inflammation',
+            'Frequent vomiting and loose stools'
+        ];
+        
+        var selectedBreed = '';
+        var selectedGender = '';
+        
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('open');
         }
         
-        function toggleCheck(id) {
-            var cb = document.getElementById(id);
-            var item = cb.closest('.checkbox-item');
+        // Build breed options
+        var breedOpts = document.getElementById('breedOptions');
+        breeds.forEach(function(b) {
+            var div = document.createElement('div');
+            div.className = 'select-option';
+            div.textContent = b;
+            div.onclick = function() { selectOption('breed', b); };
+            breedOpts.appendChild(div);
+        });
+        
+        // Build gender options
+        var genderOpts = document.getElementById('genderOptions');
+        genders.forEach(function(g) {
+            var div = document.createElement('div');
+            div.className = 'select-option';
+            div.textContent = g;
+            div.onclick = function() { selectOption('gender', g); };
+            genderOpts.appendChild(div);
+        });
+        
+        // Build symptoms
+        var symGrid = document.getElementById('symptomsGrid');
+        symptoms.forEach(function(s, i) {
+            var idx = i + 1;
+            var div = document.createElement('div');
+            div.className = 'checkbox-item';
+            div.onclick = function() { toggleCheck(this, idx); };
+            div.innerHTML = '<input type="checkbox" id="s' + idx + '" value="' + s + '"><label for="s' + idx + '">' + s + '</label>';
+            symGrid.appendChild(div);
+        });
+        
+        function toggleSelect(id) {
+            var allDropdowns = document.querySelectorAll('.select-dropdown');
+            var allTriggers = document.querySelectorAll('.select-trigger');
+            allDropdowns.forEach(function(d) { if (d.id !== id + 'Dropdown') d.classList.remove('open'); });
+            allTriggers.forEach(function(t) { if (t.parentElement.id !== id) t.classList.remove('open'); });
+            var dropdown = document.getElementById(id + 'Dropdown');
+            var trigger = document.getElementById(id).querySelector('.select-trigger');
+            dropdown.classList.toggle('open');
+            trigger.classList.toggle('open');
+            if (dropdown.classList.contains('open')) {
+                dropdown.querySelector('input').focus();
+            }
+        }
+        
+        function filterOptions(type, val) {
+            var container = document.getElementById(type + 'Options');
+            var items = container.querySelectorAll('.select-option');
+            var v = val.toLowerCase();
+            items.forEach(function(item) {
+                item.style.display = item.textContent.toLowerCase().indexOf(v) >= 0 ? '' : 'none';
+            });
+        }
+        
+        function selectOption(type, val) {
+            if (type === 'breed') {
+                selectedBreed = val;
+                var trigger = document.getElementById('breedSelect').querySelector('.select-trigger');
+                trigger.innerHTML = '<span class="selected-text">' + val + '</span><span class="arrow">▼</span>';
+                var items = document.querySelectorAll('#breedOptions .select-option');
+                items.forEach(function(i) { i.classList.remove('selected'); });
+                Array.from(items).forEach(function(i) { if (i.textContent === val) i.classList.add('selected'); });
+            } else {
+                selectedGender = val;
+                var trigger = document.getElementById('genderSelect').querySelector('.select-trigger');
+                trigger.innerHTML = '<span class="selected-text">' + val + '</span><span class="arrow">▼</span>';
+                var items = document.querySelectorAll('#genderOptions .select-option');
+                items.forEach(function(i) { i.classList.remove('selected'); });
+                Array.from(items).forEach(function(i) { if (i.textContent === val) i.classList.add('selected'); });
+            }
+            document.getElementById(type + 'Dropdown').classList.remove('open');
+            document.getElementById(type + 'Select').querySelector('.select-trigger').classList.remove('open');
+        }
+        
+        function toggleCheck(item, id) {
+            var cb = document.getElementById('s' + id);
             cb.checked = !cb.checked;
             if (cb.checked) {
                 item.classList.add('checked');
@@ -350,26 +350,32 @@
             }
         }
         
-        function goToStep(step) {
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('step3').classList.remove('active');
-            document.getElementById('step4').classList.remove('active');
-            document.getElementById('report').classList.remove('active');
-            document.getElementById('step' + step).classList.add('active');
-            
-            for (var i = 1; i <= 4; i++) {
-                document.getElementById('step' + i + 'Bar').classList.remove('active');
-                document.getElementById('label' + i).classList.remove('active');
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-select')) {
+                document.querySelectorAll('.select-dropdown').forEach(function(d) { d.classList.remove('open'); });
+                document.querySelectorAll('.select-trigger').forEach(function(t) { t.classList.remove('open'); });
             }
-            document.getElementById('step' + step + 'Bar').classList.add('active');
-            document.getElementById('label' + step).classList.add('active');
+        });
+        
+        function goToPage2() {
+            if (!selectedBreed || !selectedGender) {
+                alert('Please select breed and gender.');
+                return;
+            }
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function goToPage1() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page1').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
         
         function submitForm() {
-            var breed = document.querySelector('input[name="breed"]:checked');
-            var gender = document.querySelector('input[name="gender"]:checked');
-            var nickname = document.getElementById('nickname').value;
+            var nickname = document.getElementById('nickname').value || 'Your dog';
             var email = document.getElementById('email').value;
             
             var selected = [];
@@ -378,74 +384,59 @@
                 if (cb.checked) selected.push(cb.value);
             }
             
-            var dogName = nickname || 'Your dog';
-            var dogBreed = breed ? breed.value : 'Your dog';
-            
-            document.getElementById('reportBreed').textContent = dogName;
+            document.getElementById('reportDog').textContent = nickname;
             document.getElementById('reportCount').textContent = selected.length;
             document.getElementById('reportEmail').textContent = email || 'your email';
             
-            // Categorize symptoms
-            var joint = ['s1','s2','s11'];
-            var kidney = ['s3','s4','s8','s10','s14'];
-            var heart = ['s12','s13','s16'];
-            var skin = ['s7','s17'];
-            var digest = ['s18'];
-            var neuro = ['s5','s6','s15'];
+            // Categorize
+            var jointIds = ['s1','s2','s11'];
+            var kidneyIds = ['s3','s4','s8','s10','s14'];
+            var heartIds = ['s12','s13','s16'];
+            var skinIds = ['s7','s17'];
+            var digestIds = ['s18'];
+            var neuroIds = ['s5','s6','s15'];
             
-            var areas = [];
             var tagsHtml = '';
+            var areas = [];
             
-            var jointCount = joint.filter(function(id){return document.getElementById(id).checked}).length;
-            var kidneyCount = kidney.filter(function(id){return document.getElementById(id).checked}).length;
-            var heartCount = heart.filter(function(id){return document.getElementById(id).checked}).length;
-            var skinCount = skin.filter(function(id){return document.getElementById(id).checked}).length;
-            var digestCount = digest.filter(function(id){return document.getElementById(id).checked}).length;
-            var neuroCount = neuro.filter(function(id){return document.getElementById(id).checked}).length;
+            var j = jointIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var k = kidneyIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var h = heartIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var sk = skinIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var d = digestIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var n = neuroIds.filter(function(id){return document.getElementById(id).checked}).length;
             
-            if (jointCount > 0) { areas.push('Joint & Mobility'); tagsHtml += '<span class="tag tag-joint">🦴 Joint & Mobility (' + jointCount + ')</span> '; }
-            if (kidneyCount > 0) { areas.push('Kidney & Urinary'); tagsHtml += '<span class="tag tag-kidney">🫘 Kidney & Urinary (' + kidneyCount + ')</span> '; }
-            if (heartCount > 0) { areas.push('Heart & Circulation'); tagsHtml += '<span class="tag tag-heart">❤️ Heart & Circulation (' + heartCount + ')</span> '; }
-            if (skinCount > 0) { areas.push('Skin & Coat'); tagsHtml += '<span class="tag tag-skin">🐕 Skin & Coat (' + skinCount + ')</span> '; }
-            if (digestCount > 0) { areas.push('Digestive System'); tagsHtml += '<span class="tag tag-digest">🍖 Digestive (' + digestCount + ')</span> '; }
-            if (neuroCount > 0) { areas.push('Neurological & Sensory'); tagsHtml += '<span class="tag" style="background:#f0ebff;color:#7c3aed">🧠 Neuro & Sensory (' + neuroCount + ')</span> '; }
+            if (j > 0) { areas.push('Joint & Mobility'); tagsHtml += '<span class="tag tag-joint">🦴 Joint (' + j + ')</span> '; }
+            if (k > 0) { areas.push('Kidney & Urinary'); tagsHtml += '<span class="tag tag-kidney">🫘 Kidney (' + k + ')</span> '; }
+            if (h > 0) { areas.push('Heart & Circulation'); tagsHtml += '<span class="tag tag-heart">❤️ Heart (' + h + ')</span> '; }
+            if (sk > 0) { areas.push('Skin & Coat'); tagsHtml += '<span class="tag tag-skin">🐕 Skin (' + sk + ')</span> '; }
+            if (d > 0) { areas.push('Digestive'); tagsHtml += '<span class="tag tag-digest">🍖 Digest (' + d + ')</span> '; }
+            if (n > 0) { areas.push('Neuro & Sensory'); tagsHtml += '<span class="tag tag-neuro">🧠 Neuro (' + n + ')</span> '; }
             
-            document.getElementById('reportTags').innerHTML = tagsHtml || '<span class="tag" style="background:#f5f5f5;color:#999">No specific area detected</span>';
+            document.getElementById('reportTags').innerHTML = tagsHtml || '<span class="tag" style="background:#f5f5f5;color:#999">No specific area</span>';
             
-            // Generate summary
             var count = selected.length;
             var summary = '';
             if (count == 0) {
-                summary = dogName + ' shows no significant symptoms at this time. Continue monitoring for any changes and maintain regular vet checkups.';
+                summary = nickname + ' shows no significant symptoms at this time. Continue monitoring and maintain regular vet checkups.';
             } else if (count <= 3) {
-                summary = dogName + ' (' + dogBreed + ', ' + gender.value + ') shows ' + count + ' symptom(s) primarily in: ' + areas.join(', ') + '. Most symptoms are mild at this stage. We recommend scheduling a vet visit within 1-2 weeks.';
+                summary = nickname + ' (' + selectedBreed + ', ' + selectedGender + ') shows ' + count + ' symptom(s) in: ' + areas.join(', ') + '. Most are mild — see a vet within 1-2 weeks.';
             } else if (count <= 8) {
-                summary = dogName + ' (' + dogBreed + ', ' + gender.value + ') shows ' + count + ' symptoms across: ' + areas.join(', ') + '. This suggests moderate health concerns that should be evaluated by a vet within the next week.';
+                summary = nickname + ' (' + selectedBreed + ', ' + selectedGender + ') shows ' + count + ' symptoms across: ' + areas.join(', ') + '. Moderate concerns — see a vet within a week.';
             } else {
-                summary = dogName + ' (' + dogBreed + ', ' + gender.value + ') shows ' + count + ' symptoms in: ' + areas.join(', ') + '. Multiple symptom categories are affected. We strongly recommend seeing a vet as soon as possible.';
+                summary = nickname + ' (' + selectedBreed + ', ' + selectedGender + ') shows ' + count + ' symptoms in: ' + areas.join(', ') + '. Multiple areas affected — see a vet ASAP.';
             }
             document.getElementById('reportSummary').textContent = summary;
             
-            // Generate recommendations
-            var rec = '';
-            if (areas.length == 0) {
-                rec = '• Keep up with regular vet checkups (every 6-12 months for senior dogs)\n• Maintain healthy diet and weight\n• Gentle daily exercise';
-            } else {
-                rec = '• Schedule a vet appointment to discuss these symptoms\n• Keep a daily symptom diary for your vet\n• Monitor water intake and urine output\n• Note any changes in appetite, energy, or behavior';
-            }
+            var rec = areas.length == 0
+                ? '• Keep regular vet checkups\n• Maintain healthy diet & weight\n• Gentle daily exercise'
+                : '• Schedule a vet appointment\n• Keep a daily symptom diary\n• Monitor water intake & urine output\n• Note changes in appetite & energy';
             document.getElementById('reportRec').textContent = rec;
             
-            // Show report
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('step3').classList.remove('active');
-            document.getElementById('step4').classList.remove('active');
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.remove('active');
             document.getElementById('report').classList.add('active');
-            
-            for (var i = 1; i <= 4; i++) {
-                document.getElementById('step' + i + 'Bar').classList.add('active');
-                document.getElementById('label' + i).classList.add('active');
-            }
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
