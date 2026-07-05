@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthritis in Senior Dogs | Joint & Mobility | PawWell</title>
+    <meta name="description" content="Complete guide to arthritis in senior dogs. Learn symptoms, treatments, supplements and how to help your aging dog move comfortably.">
+    <meta name="robots" content="index, follow">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
+        
+        .header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-wrap { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .logo-text { font-family: 'Fredoka', 'Segoe UI', sans-serif; font-size: 1.55rem; font-weight: 700; color: #2c3e50; letter-spacing: -0.5px; line-height: 1; }
+        .logo-text span { color: #ff6b6b; }
+        .logo-paws { display: flex; gap: 2px; font-size: 1.1rem; opacity: 0.7; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
+        .nav a:hover { background: #f5f5f5; }
+        
+        .main { padding: 6rem 18px 3rem; max-width: 760px; margin: 0 auto; }
+        
+        /* Hero */
+        .disease-hero { text-align: center; padding-bottom: 2rem; border-bottom: 2px solid #ffe8d6; margin-bottom: 2rem; }
+        .disease-icon { font-size: 5rem; margin-bottom: 1rem; }
+        .disease-badge { display: inline-block; background: #fff0eb; color: #ff6b6b; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .disease-hero h1 { font-size: 2.2rem; margin-bottom: 0.8rem; color: #2c3e50; }
+        .disease-hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 560px; margin: 0 auto; }
+        
+        /* Sections */
+        .section { margin-bottom: 2.5rem; }
+        .section h2 { font-size: 1.4rem; margin-bottom: 1rem; color: #2c3e50; display: flex; align-items: center; gap: 0.5rem; }
+        .section h2 .icon { font-size: 1.4rem; }
+        .section p { color: #5a6c7d; line-height: 1.8; margin-bottom: 0.8rem; font-size: 0.97rem; }
+        
+        /* Symptom list */
+        .symptom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .symptom-item { background: white; padding: 14px; border-radius: 14px; display: flex; align-items: flex-start; gap: 0.6rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .symptom-item .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+        .symptom-item span { font-size: 0.9rem; color: #3d4f63; line-height: 1.4; }
+        
+        /* Tips */
+        .tip-card { background: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+        .tip-card h3 { font-size: 1.05rem; color: #ff6b6b; margin-bottom: 0.5rem; }
+        .tip-card p { font-size: 0.9rem; color: #5a6c7d; line-height: 1.6; margin: 0; }
+        
+        /* CTA */
+        .cta-section { background: linear-gradient(135deg, #ff6b6b, #ff8e53); border-radius: 20px; padding: 2.5rem; text-align: center; margin: 2.5rem 0; }
+        .cta-section h2 { color: white; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .cta-btn { display: inline-block; background: white; color: #ff6b6b; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s; }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
+        
+        /* Severity */
+        .severity-bar { background: white; border-radius: 16px; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .severity-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+        .severity-item:last-child { margin-bottom: 0; }
+        .severity-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .severity-item span { font-size: 0.88rem; color: #5a6c7d; }
+        
+        .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
+        .footer a { color: #ff8e53; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .disease-hero h1 { font-size: 1.8rem; }
+            .main { padding-top: 5.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-wrap">
+                <div class="logo-text">Paw<span>Well</span></div>
+                <div class="logo-paws">🐾🐾</div>
+            </a>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="assessment.html">AI Health Check</a>
+                <a href="arthritis.html" style="background:#fff5f0;color:#ff6b6b;font-weight:700;">🦴 Joint</a>
+                <a href="kidney.html">🫘 Kidney</a>
+                <a href="heart.html">❤️ Heart</a>
+                <a href="community.html">Community</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="disease-hero">
+            <div class="disease-icon">🦴</div>
+            <div class="disease-badge">Most Common in Senior Dogs</div>
+            <h1>Arthritis in Senior Dogs</h1>
+            <p>Arthritis affects 1 in 4 senior dogs in Australia. Early detection and proper management can dramatically improve your dog's quality of life.</p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📖</span> What Is Canine Arthritis?</h2>
+            <p>Arthritis (osteoarthritis or degenerative joint disease) is a progressive condition where the protective cartilage in joints wears down over time, causing pain, stiffness, and reduced mobility.</p>
+            <p>It most commonly affects the hips, elbows, knees, and spine — and is especially prevalent in dogs over 7 years old. Large breeds and overweight dogs are at higher risk.</p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">⚠️</span> Common Symptoms</h2>
+            <div class="symptom-grid">
+                <div class="symptom-item"><span class="icon">🔹</span><span>Stiffness after rest, especially in the morning</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Difficulty getting up from lying down</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Limping or favoring one or more legs</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Reluctance to jump, climb stairs, or run</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Slowing down on walks or shorter walks</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Licking or chewing at joints</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Muscle loss in affected limbs</span></div>
+                <div class="symptom-item"><span class="icon">🔹</span><span>Irritability when touched in certain areas</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">🩺</span> Severity Levels</h2>
+            <div class="severity-bar">
+                <div class="severity-item">
+                    <div class="severity-dot" style="background:#4CAF50;"></div>
+                    <span><strong>Mild:</strong> Slight stiffness, occasional limp — responds well to supplements and weight management</span>
+                </div>
+                <div class="severity-item">
+                    <div class="severity-dot" style="background:#FF9800;"></div>
+                    <span><strong>Moderate:</strong> Noticeable stiffness, reduced activity — requires supplements + pain management</span>
+                </div>
+                <div class="severity-item">
+                    <div class="severity-dot" style="background:#f44336;"></div>
+                    <span><strong>Severe:</strong> Difficulty moving, significant pain — needs vet-prescribed medication and lifestyle changes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">💡</span> Care Tips</h2>
+            <div class="tip-card">
+                <h3>🏋️ Maintain a Healthy Weight</h3>
+                <p>Excess weight puts enormous stress on joints. Even a 5% reduction in body weight can significantly reduce pain in arthritic dogs.</p>
+            </div>
+            <div class="tip-card">
+                <h3>🦴 Joint Supplements</h3>
+                <p>Glucosamine, chondroitin, MSM, and omega-3 fatty acids (fish oil) can help reduce inflammation and support cartilage health.</p>
+            </div>
+            <div class="tip-card">
+                <h3>🛋️ Comfortable Sleeping Surface</h3>
+                <p>Orthopedic dog beds with memory foam cushion joints and reduce pressure points. Keep bedding warm — cold worsens stiffness.</p>
+            </div>
+            <div class="tip-card">
+                <h3>🚶 Gentle, Regular Exercise</h3>
+                <p>Short daily walks (15–30 min) on soft surfaces help maintain muscle and joint flexibility. Avoid running on hard ground.</p>
+            </div>
+            <div class="tip-card">
+                <h3>🏠 Home Modifications</h3>
+                <p>Ramps for cars and furniture, non-slip rugs on slippery floors, and raised food bowls can make daily life much easier.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Is Your Dog Showing Signs of Arthritis?</h2>
+            <p>Take our free 2-minute AI health check to assess your dog's joint health.</p>
+            <a href="assessment.html" class="cta-btn">🤖 Start AI Health Check</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 PawWell. All rights reserved.</p>
+        <p style="margin-top:0.5rem;">
+            <a href="index.html">Home</a> · <a href="arthritis.html">Joint</a> · <a href="kidney.html">Kidney</a> · <a href="heart.html">Heart</a> · <a href="community.html">Community</a>
+        </p>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('open'); }
+        document.addEventListener('click', function(e) {
+            var nav = document.getElementById('navMenu');
+            var hamburger = document.querySelector('.hamburger');
+            if (nav.classList.contains('open') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+                nav.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
