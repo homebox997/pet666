@@ -30,7 +30,7 @@
         .progress-bar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
         .progress-step { flex: 1; height: 8px; background: #e0e0e0; border-radius: 4px; transition: all 0.3s; }
         .progress-step.active { background: linear-gradient(135deg, #ff6b6b, #ff8e53); }
-        .progress-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #999; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #999; }
         .progress-labels span.active { color: #ff6b6b; font-weight: 600; }
         
         .form-section { padding: 1rem 18px 3rem; max-width: 600px; margin: 0 auto; }
@@ -44,36 +44,31 @@
         .form-group input[type="text"], .form-group input[type="number"], .form-group input[type="email"] { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
         .form-group input:focus { outline: none; border-color: #ff6b6b; }
         
-        /* Breed Grid */
         .breed-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
         .breed-option { display: none; }
         .breed-option + label { display: block; padding: 14px 12px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 0.9rem; background: #f8f9fa; }
         .breed-option:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
         
-        /* Gender Selection */
         .gender-options { display: flex; gap: 1rem; }
         .gender-option { flex: 1; }
         .gender-option input { display: none; }
         .gender-option label { display: block; padding: 18px; text-align: center; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1.1rem; background: #f8f9fa; }
         .gender-option input:checked + label { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border-color: #ff6b6b; }
         
-        /* Checkbox Grid */
-        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
         .checkbox-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; }
         .checkbox-item:hover { background: #fff5f0; }
-        .checkbox-item input { margin-top: 4px; width: 18px; height: 18px; cursor: pointer; }
-        .checkbox-item label { flex: 1; font-size: 0.95rem; line-height: 1.4; cursor: pointer; }
+        .checkbox-item input { margin-top: 3px; width: 18px; height: 18px; cursor: pointer; flex-shrink: 0; }
+        .checkbox-item label { flex: 1; font-size: 0.92rem; line-height: 1.4; cursor: pointer; color: #2c3e50; }
+        .checkbox-item .cn { display: none; font-size: 0.82rem; color: #888; margin-top: 2px; }
         
-        /* Buttons */
         .btn-group { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
         .btn { padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; }
         .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); }
         .btn-secondary { background: white; color: #ff6b6b; border: 2px solid #ff6b6b; }
         .btn-secondary:hover { background: #fff5f0; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
-        /* Result */
         .result-card { background: linear-gradient(135deg, #fff5f0, #ffe8d6); padding: 2.5rem; border-radius: 20px; text-align: center; display: none; }
         .result-card.active { display: block; }
         .result-card h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #2c3e50; }
@@ -92,7 +87,8 @@
             .breed-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem; }
             .breed-option + label { padding: 12px 8px; font-size: 0.85rem; }
             .gender-option label { padding: 16px; font-size: 1rem; }
-            .progress-labels { font-size: 0.65rem; }
+            .progress-labels { font-size: 0.6rem; }
+            .checkbox-item label { font-size: 0.88rem; }
         }
     </style>
 </head>
@@ -135,74 +131,24 @@
         <div class="form-card active" id="step1">
             <h2>What breed is your dog?</h2>
             <p>Select your dog's breed from the list below.</p>
-            
             <div class="breed-grid">
-                <div>
-                    <input type="radio" name="breed" id="breed1" value="Cavoodle" class="breed-option">
-                    <label for="breed1">Cavoodle</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed2" value="Labrador" class="breed-option">
-                    <label for="breed2">Labrador</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed3" value="Golden Retriever" class="breed-option">
-                    <label for="breed3">Golden Retriever</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed4" value="French Bulldog" class="breed-option">
-                    <label for="breed4">French Bulldog</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed5" value="German Shepherd" class="breed-option">
-                    <label for="breed5">German Shepherd</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed6" value="Border Collie" class="breed-option">
-                    <label for="breed6">Border Collie</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed7" value="Groodle" class="breed-option">
-                    <label for="breed7">Groodle</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed8" value="Mini Dachshund" class="breed-option">
-                    <label for="breed8">Mini Dachshund</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed9" value="Poodle" class="breed-option">
-                    <label for="breed9">Poodle</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed10" value="Cavalier King Charles" class="breed-option">
-                    <label for="breed10">Cavalier King Charles</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed11" value="Australian Kelpie" class="breed-option">
-                    <label for="breed11">Australian Kelpie</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed12" value="Staffy" class="breed-option">
-                    <label for="breed12">Staffy</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed13" value="Labradoodle" class="breed-option">
-                    <label for="breed13">Labradoodle</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed14" value="Spoodle" class="breed-option">
-                    <label for="breed14">Spoodle</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed15" value="Chihuahua" class="breed-option">
-                    <label for="breed15">Chihuahua</label>
-                </div>
-                <div>
-                    <input type="radio" name="breed" id="breed16" value="Maltese" class="breed-option">
-                    <label for="breed16">Maltese</label>
-                </div>
+                <div><input type="radio" name="breed" id="b1" value="Cavoodle"><label for="b1">Cavoodle</label></div>
+                <div><input type="radio" name="breed" id="b2" value="Labrador"><label for="b2">Labrador</label></div>
+                <div><input type="radio" name="breed" id="b3" value="Golden Retriever"><label for="b3">Golden Retriever</label></div>
+                <div><input type="radio" name="breed" id="b4" value="French Bulldog"><label for="b4">French Bulldog</label></div>
+                <div><input type="radio" name="breed" id="b5" value="German Shepherd"><label for="b5">German Shepherd</label></div>
+                <div><input type="radio" name="breed" id="b6" value="Border Collie"><label for="b6">Border Collie</label></div>
+                <div><input type="radio" name="breed" id="b7" value="Groodle"><label for="b7">Groodle</label></div>
+                <div><input type="radio" name="breed" id="b8" value="Mini Dachshund"><label for="b8">Mini Dachshund</label></div>
+                <div><input type="radio" name="breed" id="b9" value="Poodle"><label for="b9">Poodle</label></div>
+                <div><input type="radio" name="breed" id="b10" value="Cavalier King Charles"><label for="b10">Cavalier King Charles</label></div>
+                <div><input type="radio" name="breed" id="b11" value="Australian Kelpie"><label for="b11">Australian Kelpie</label></div>
+                <div><input type="radio" name="breed" id="b12" value="Staffy"><label for="b12">Staffy</label></div>
+                <div><input type="radio" name="breed" id="b13" value="Labradoodle"><label for="b13">Labradoodle</label></div>
+                <div><input type="radio" name="breed" id="b14" value="Spoodle"><label for="b14">Spoodle</label></div>
+                <div><input type="radio" name="breed" id="b15" value="Chihuahua"><label for="b15">Chihuahua</label></div>
+                <div><input type="radio" name="breed" id="b16" value="Maltese"><label for="b16">Maltese</label></div>
             </div>
-            
             <div class="btn-group" style="justify-content: flex-end;">
                 <button class="btn btn-primary" onclick="goToStep(2)">Next →</button>
             </div>
@@ -212,7 +158,6 @@
         <div class="form-card" id="step2">
             <h2>What is your dog's gender?</h2>
             <p>Select the appropriate option.</p>
-            
             <div class="gender-options">
                 <div class="gender-option">
                     <input type="radio" name="gender" id="male" value="Male">
@@ -223,7 +168,6 @@
                     <label for="female">♀ Female</label>
                 </div>
             </div>
-            
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
                 <button class="btn btn-primary" onclick="goToStep(3)">Next →</button>
@@ -234,12 +178,10 @@
         <div class="form-card" id="step3">
             <h2>What's your dog's nickname?</h2>
             <p>Enter a name or nickname for your dog.</p>
-            
             <div class="form-group">
                 <label>Nickname</label>
                 <input type="text" id="nickname" placeholder="e.g. Buddy, Max, Bella...">
             </div>
-            
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
                 <button class="btn btn-primary" onclick="goToStep(4)">Next →</button>
@@ -250,87 +192,84 @@
         <div class="form-card" id="step4">
             <h2>Any symptoms noticed?</h2>
             <p>Check all symptoms you've observed in your senior dog.</p>
-            
             <div class="checkbox-grid">
                 <div class="checkbox-item">
                     <input type="checkbox" id="s1">
-                    <label for="s1">Stiff or slow when walking</label>
+                    <label for="s1">Stiff joints, reduced mobility</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s2">
-                    <label for="s2">Difficulty getting up after resting</label>
+                    <label for="s2">Weak hind legs and lameness</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s3">
-                    <label for="s3">Reluctant to jump or climb stairs</label>
+                    <label for="s3">Excessive thirst and increased urination</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s4">
-                    <label for="s4">Limping or favoring one leg</label>
+                    <label for="s4">Frequent nighttime urination</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s5">
-                    <label for="s5">Increased thirst or urination</label>
+                    <label for="s5">Vision loss, bumping into things</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s6">
-                    <label for="s6">Loss of appetite or weight loss</label>
+                    <label for="s6">Hearing loss, slow response</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s7">
-                    <label for="s7">Vomiting or diarrhea</label>
+                    <label for="s7">Dry coat and excessive shedding</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s8">
-                    <label for="s8">Bad breath or mouth odor</label>
+                    <label for="s8">Poor appetite, reduced food intake</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s9">
-                    <label for="s9">Coughing, especially at night</label>
+                    <label for="s9">Abnormally increased appetite</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s10">
-                    <label for="s10">Difficulty breathing or rapid breathing</label>
+                    <label for="s10">Unexplained continuous weight loss</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s11">
-                    <label for="s11">Fatigue or exercise intolerance</label>
+                    <label for="s11">Low stamina, lack of willingness to walk</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s12">
-                    <label for="s12">Fainting or collapsing</label>
+                    <label for="s12">Chronic cough worse after exercise</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s13">
-                    <label for="s13">Cloudy eyes or vision problems</label>
+                    <label for="s13">Resting rapid breathing</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s14">
-                    <label for="s14">Confusion or disorientation</label>
+                    <label for="s14">Urinary or fecal incontinence</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s15">
-                    <label for="s15">Excessive panting</label>
+                    <label for="s15">Cognitive confusion, repetitive circling</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s16">
-                    <label for="s16">Lumps or swelling</label>
+                    <label for="s16">Pale gums, poor circulation</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s17">
-                    <label for="s17">Changes in behavior or personality</label>
+                    <label for="s17">Recurrent itching and skin inflammation</label>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" id="s18">
-                    <label for="s18">Weight gain or pot belly</label>
+                    <label for="s18">Frequent vomiting and loose stools</label>
                 </div>
             </div>
-            
             <div class="form-group" style="margin-top: 1.5rem;">
                 <label>Your Email (to receive the report)</label>
                 <input type="email" id="email" placeholder="you@example.com">
             </div>
-            
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="goToStep(3)">← Back</button>
                 <button class="btn btn-primary" onclick="submitForm()">Submit</button>
