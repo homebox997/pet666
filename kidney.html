@@ -40,6 +40,20 @@
         .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; font-size: 0.95rem; }
         .cta-btn { display: inline-block; background: white; color: #4a9eb8; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s; }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
+        /* ====== RELATED COMMUNITY ====== */
+        .community-related { background: white; border-radius: 20px; padding: 1.8rem; margin-top: 2rem; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+        .community-related h2 { font-size: 1.2rem; color: #2c3e50; margin-bottom: 1.2rem; }
+        .related-post { padding: 1rem; border-radius: 14px; border: 1.5px solid #f0f0f0; margin-bottom: 0.8rem; cursor: pointer; transition: all 0.3s; }
+        .related-post:hover { border-color: #4a9eb8; box-shadow: 0 4px 12px rgba(74,158,184,0.1); }
+        .related-user { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+        .related-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: white; flex-shrink: 0; }
+        .related-name { font-size: 0.82rem; font-weight: 700; color: #2c3e50; }
+        .related-time { font-size: 0.75rem; color: #aaa; }
+        .related-post h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.4rem; line-height: 1.4; }
+        .related-post p { font-size: 0.83rem; color: #7a8a9a; line-height: 1.5; margin-bottom: 0.4rem; }
+        .related-meta { font-size: 0.78rem; color: #aaa; }
+        .related-more-btn { display: block; text-align: center; padding: 12px; border: 2px solid #4a9eb8; border-radius: 12px; color: #4a9eb8; font-weight: 700; font-size: 0.88rem; text-decoration: none; margin-top: 0.8rem; transition: all 0.3s; }
+        .related-more-btn:hover { background: #4a9eb8; color: white; }
         .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
         .site-footer a { color: #ff8e53; text-decoration: none; }
         @media (max-width: 768px) {
@@ -126,6 +140,42 @@
                 <h2 id="kidney-cta">Concerned About Your Dog's Kidney Health?</h2>
                 <p>Take our free AI health check to assess your dog's symptoms and get guidance on next steps.</p>
                 <a href="assessment.html" class="cta-btn" aria-label="Start free AI Health Check for your dog">Start AI Health Check</a>
+            </section>
+
+            <!-- Related Community Discussions -->
+            <section class="community-related" aria-labelledby="kidney-community">
+                <h2 id="kidney-community">Community Discussions on Kidney Disease</h2>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#c0392b;">LT</div>
+                        <div><div class="related-name">BellaLover · Bella (Cavalier King Charles, 10yo)</div>
+                        <div class="related-time">5 hours ago · 📋 Health Case · 📌 Pinned</div></div>
+                    </div>
+                    <h3>"Bella diagnosed with early-stage kidney disease — what the vet told us"</h3>
+                    <p>Blood tests showed elevated creatinine and BUN. Our vet said we caught it very early. Sharing because early detection made all the difference.</p>
+                    <div class="related-meta">❤️ 83 likes · 💬 21 comments</div>
+                </div>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#27ae60;">AW</div>
+                        <div><div class="related-name">CharlieMum · Charlie (Cavoodle, 8yo)</div>
+                        <div class="related-time">2 days ago · 📋 Health Case</div></div>
+                    </div>
+                    <h3>"Charlie's skin issues turned out to be kidney-related — always trust your gut"</h3>
+                    <p>Months of skin problems. Turns out it was CKD all along. A lesson in early detection and advocating for your dog.</p>
+                    <div class="related-meta">❤️ 201 likes · 💬 58 comments</div>
+                </div>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#e67e22;">DL</div>
+                        <div><div class="related-name">MaxOwner · Max (Border Collie, 10yo)</div>
+                        <div class="related-time">5 days ago · 💡 Tips</div></div>
+                    </div>
+                    <h3>"Free symptom tracking spreadsheet — spotted patterns we never noticed"</h3>
+                    <p>Built a weekly tracker in Google Sheets. Helped us discover Max is always worse on cold days and after skipping supplements.</p>
+                    <div class="related-meta">❤️ 73 likes · 💬 28 comments</div>
+                </div>
+                <a href="community.html" class="related-more-btn">View More Community Discussions →</a>
             </section>
         </article>
     </main>

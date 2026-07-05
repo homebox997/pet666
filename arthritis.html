@@ -51,6 +51,20 @@
         .severity-item:last-child { margin-bottom: 0; }
         .severity-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
         .severity-item span { font-size: 0.88rem; color: #5a6c7d; }
+        /* ====== RELATED COMMUNITY ====== */
+        .community-related { background: white; border-radius: 20px; padding: 1.8rem; margin-top: 2rem; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+        .community-related h2 { font-size: 1.2rem; color: #2c3e50; margin-bottom: 1.2rem; }
+        .related-post { padding: 1rem; border-radius: 14px; border: 1.5px solid #f0f0f0; margin-bottom: 0.8rem; cursor: pointer; transition: all 0.3s; }
+        .related-post:hover { border-color: #ff6b6b; box-shadow: 0 4px 12px rgba(255,107,107,0.1); }
+        .related-user { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+        .related-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: white; flex-shrink: 0; }
+        .related-name { font-size: 0.82rem; font-weight: 700; color: #2c3e50; }
+        .related-time { font-size: 0.75rem; color: #aaa; }
+        .related-post h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.4rem; line-height: 1.4; }
+        .related-post p { font-size: 0.83rem; color: #7a8a9a; line-height: 1.5; margin-bottom: 0.4rem; }
+        .related-meta { font-size: 0.78rem; color: #aaa; }
+        .related-more-btn { display: block; text-align: center; padding: 12px; border: 2px solid #ff6b6b; border-radius: 12px; color: #ff6b6b; font-weight: 700; font-size: 0.88rem; text-decoration: none; margin-top: 0.8rem; transition: all 0.3s; }
+        .related-more-btn:hover { background: #ff6b6b; color: white; }
         /* ====== FOOTER ====== */
         .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
         .site-footer a { color: #ff8e53; text-decoration: none; }
@@ -182,6 +196,42 @@
                 <h2 id="arthritis-cta">Is Your Dog Showing Signs of Arthritis?</h2>
                 <p>Take our free 2-minute AI health check to assess your dog's joint health and get personalized recommendations.</p>
                 <a href="assessment.html" class="cta-btn" aria-label="Start free AI Health Check for your dog">Start AI Health Check</a>
+            </section>
+
+            <!-- Related Community Discussions -->
+            <section class="community-related" aria-labelledby="arthritis-community">
+                <h2 id="arthritis-community">Community Discussions on Arthritis</h2>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#ff6b6b;">SM</div>
+                        <div><div class="related-name">MiloMum · Milo (Golden Retriever, 11yo)</div>
+                        <div class="related-time">2 hours ago · 📋 Health Case</div></div>
+                    </div>
+                    <h3>"Milo's arthritis journey — 18 months of supplements, here's what worked"</h3>
+                    <p>After diagnosis with moderate arthritis at age 10, Milo on glucosamine, MSM and fish oil for 18 months — full recovery story.</p>
+                    <div class="related-meta">❤️ 47 likes · 💬 12 comments</div>
+                </div>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#7c3aed;">MR</div>
+                        <div><div class="related-name">RockyDad · Rocky (Labrador, 12yo)</div>
+                        <div class="related-time">1 day ago · 💡 Tips</div></div>
+                    </div>
+                    <h3>"The $30 Bunnings ramp that changed everything for Rocky"</h3>
+                    <p>Rocky is 12 with bad hips. DIY ramp for couch and car boot — a simple fix that changed his life.</p>
+                    <div class="related-meta">❤️ 124 likes · 💬 45 comments</div>
+                </div>
+                <div class="related-post" onclick="window.open('community.html','_blank')">
+                    <div class="related-user">
+                        <div class="related-avatar" style="background:#27ae60;">FS</div>
+                        <div><div class="related-name">CocoCarer · Coco (Poodle, 13yo)</div>
+                        <div class="related-time">3 days ago · ⭐ Product Review</div></div>
+                    </div>
+                    <h3>"Honest review: 5 orthopedic dog beds — which one is actually worth it"</h3>
+                    <p>Big Barker, K9, Kmart and IKEA hacks — tested with Coco (13, arthritis) and Buddy (7).</p>
+                    <div class="related-meta">❤️ 89 likes · 💬 67 comments</div>
+                </div>
+                <a href="community.html" class="related-more-btn">View More Community Discussions →</a>
             </section>
         </article>
     </main>
